@@ -10,6 +10,7 @@ lightdoc，设计实现一种，直接基于markdown格式，以文件夹存储�
 + 左侧目录树
 + 中间markdown格式化显示
 + 右上搜索
++ 左上放置logo
 
 ## 参考
 ![tidb doc](/img/tidb.jpg)
