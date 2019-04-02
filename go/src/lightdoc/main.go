@@ -11,5 +11,8 @@ func main() {
 	if len(os.Args) > 1 {
 		config.Root = os.Args[1]
 	}
-	route.Init()
+	err := route.Init()
+	if err != nil {
+		panic(err)
+	}
 }
