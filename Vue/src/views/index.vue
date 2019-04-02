@@ -3,7 +3,7 @@
 	    <v-header></v-header>
 		<div class="content">
 			<v-aside @updataPath="getPath($event)" class="hidden-xs-only"></v-aside>
-			<v-markdown :Path='path'></v-markdown>
+			<v-markdown :Path="path"></v-markdown>
 		</div>
 		
 	</div>
@@ -17,7 +17,7 @@ import 'element-ui/lib/theme-chalk/display.css';
 export default {
 	data (){
 		return {
-			path:''
+			path:[]
 		}
 	},
   components: {
@@ -28,7 +28,8 @@ export default {
   },
   methods: {
 		getPath(e){
-			this.path=e
+			this.path.push(e)
+			debugger
 		}
 	}
 }

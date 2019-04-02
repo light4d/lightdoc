@@ -1,5 +1,5 @@
 <template>
-	<div class="container" v-html="readmeContent">	
+	<div class="container" v-html="this.$store.state.readmeContent">	
 	</div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 	name:'vMarkdown',
 	props:{
 		Path:{
-			type:String
+			type:Array
 		}
 	},
 	data() {

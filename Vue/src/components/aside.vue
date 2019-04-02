@@ -11,6 +11,7 @@
 <script>
 import vSearch from './search.vue'
 import vTree from './tree.vue'
+import marked from 'marked'
 export default {
 	 data() {
       return {
@@ -18,7 +19,8 @@ export default {
         defaultProps: {
           children: 'Nodes',
           label: 'Name'
-        }
+				},
+				readmeContent:{}
       };
     },
 		components:{
@@ -28,16 +30,17 @@ export default {
 		mounted(){
 			
 			this.axios.patch('http://localhost:8000').then((res)=>{
-				debugger
+		
 				this.data=res.data.Nodes
 				console.log(res)
 			})
 		},
     methods: {
       handleNodeClick(data) {
-				console.log()
+			
 				 //this.axios.get('/api/'+data.Path)
-				this.$emit('updataPath',data.Path)
+				//this.$emit('updataPath',data.Path)
+				this.$store.commit('changeValue',data.Path)
       }
     }
 }
