@@ -15,6 +15,8 @@ lightdoc，设计实现一种，直接基于markdown格式，以文件夹存储�
 ## 参考
 
 + [tidb](https://pingcap.com/docs-cn/sql/sql-optimizer-overview/)
-![tidb doc](/img/tidb.jpg)
+![tidb doc](img/tidb.jpg)
 + [minio](https://docs.min.io/)
-![minio](/img/minio.jpg)
+![minio](img/minio.jpg)
++ [nodejs](https://nodejs.org/docs/latest-v9.x/api/assert.html)
+![nodejs](img/node.png)
