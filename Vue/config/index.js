@@ -14,9 +14,9 @@ module.exports = {
 		'/api':{
 			target: 'http://192.168.2.23:8000',
 			changeOrigin: true,  // 是否跨域
-			pathRewrite: {
-				'^/api': '/'
-			}
+      // pathRewrite: {
+      // 	'^/api': '/'
+      // }
 		}
 	},
 

@@ -5,7 +5,7 @@
 			<v-aside @updataPath="getPath($event)" class="hidden-xs-only"></v-aside>
 			<v-markdown :Path='path'></v-markdown>
 		</div>
-		<sm-show class="smShow hidden-sm-and-up"></sm-show>
+		
 	</div>
 </template>
 <script>

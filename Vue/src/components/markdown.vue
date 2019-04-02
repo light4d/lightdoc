@@ -42,7 +42,7 @@ export default {
 	},
 	mounted(){
 		console.log( this.Path,'-----')
-		this.axios.get('/api'+this.Path).then((res)=>{
+		this.axios.get('http://localhost:8000'+this.Path).then((res)=>{
 			this.readmeContent=marked(res.data)
 		})
 		marked.setOptions({

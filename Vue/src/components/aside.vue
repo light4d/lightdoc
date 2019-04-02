@@ -26,7 +26,9 @@ export default {
 			vTree
 		},
 		mounted(){
-			this.axios.patch('/api').then((res)=>{
+			
+			this.axios.patch('http://localhost:8000').then((res)=>{
+				debugger
 				this.data=res.data.Nodes
 				console.log(res)
 			})
