@@ -2,35 +2,40 @@
 	<div class="container">
 		<v-search></v-search>
 		<div class="tree">
-			<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+			<!-- <v-tree></v-tree> -->
+			<el-tree  :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 		</div>
 	</div>
 </template>
 
 <script>
 import vSearch from './search.vue'
+import vTree from './tree.vue'
 export default {
 	 data() {
       return {
         data: [],
         defaultProps: {
-          children: 'Folder',
+          children: 'Nodes',
           label: 'Name'
         }
       };
     },
 		components:{
-			vSearch
+			vSearch,
+			vTree
 		},
 		mounted(){
 			this.axios.patch('/api').then((res)=>{
-				this.data=res.data.Folder
+				this.data=res.data.Nodes
 				console.log(res)
 			})
 		},
     methods: {
       handleNodeClick(data) {
-        
+				console.log()
+				 //this.axios.get('/api/'+data.Path)
+				this.$emit('updataPath',data.Path)
       }
     }
 }

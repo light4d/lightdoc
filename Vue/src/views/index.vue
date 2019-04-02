@@ -2,8 +2,8 @@
 	<div class="container">
 	    <v-header></v-header>
 		<div class="content">
-			<v-aside class="hidden-xs-only"></v-aside>
-			<v-markdown></v-markdown>
+			<v-aside @updataPath="getPath($event)" class="hidden-xs-only"></v-aside>
+			<v-markdown :Path='path'></v-markdown>
 		</div>
 		<sm-show class="smShow hidden-sm-and-up"></sm-show>
 	</div>
@@ -15,13 +15,22 @@ import vMarkdown from '../components/markdown.vue'
 import smShow from '../components/smShow.vue'
 import 'element-ui/lib/theme-chalk/display.css';
 export default {
+	data (){
+		return {
+			path:''
+		}
+	},
   components: {
 	vHeader,
 	vAside,
 	vMarkdown,
 	smShow
   },
-  methods: {}
+  methods: {
+		getPath(e){
+			this.path=e
+		}
+	}
 }
 </script>
 <style lang="stylus" scoped>
