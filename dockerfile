@@ -1,9 +1,10 @@
-FROM alpine:latest
+FROM ubuntu:latest
 MAINTAINER light4d
 WORKDIR /opt/lightdoc
-ADD go/src/lightdoc/lightdoc /opt/lightdoc
-ADD vue/dist .
-EXPOSE 8000
-EXPOSE 8080
+ADD go/src/lightdoc/lightdoc /opt/lightdoc/
+ADD vue/dist /opt/lightdoc/dist
+EXPOSE 8000 8080
+VOLUME ["/var/lightdoc"]
+CMD ["/opt/lightdoc/lightdoc"]
 
-ENTRYPOINT ["./opt/lightdoc/lightdoc"]
+
