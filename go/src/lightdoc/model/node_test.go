@@ -8,7 +8,7 @@ import (
 
 func TestNode_Filelist(t *testing.T) {
 	path := "/home/zh/testforgo"
-	tree := new(Folder)
+	tree := new(Node)
 
 	tree.Filelist(path)
 

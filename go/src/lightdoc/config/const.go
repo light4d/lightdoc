@@ -1,4 +1,4 @@
 package config
 
-var Root = ""
+var Root = "/var/lightdoc"
 var Dist = ""

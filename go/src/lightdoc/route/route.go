@@ -1,12 +1,9 @@
 package route
 
 import (
-	"fmt"
-	"io/ioutil"
 	"lightdoc/config"
 	"lightdoc/controller"
 	"net/http"
-	"strconv"
 )
 
 func Init() error {
@@ -17,22 +14,13 @@ func Init() error {
 		writer.Header().Add("Access-Control-Allow-Credentials", "true")
 		switch request.Method {
 		case http.MethodGet:
-			controller.FileHandler(writer, request)
+			http.FileServer(http.Dir(config.Root)).ServeHTTP(writer, request)
 		case http.MethodPatch:
 			controller.IndexHandler(writer, request)
 		}
 	})
 	go http.ListenAndServe(":8000", nil)
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		path := config.Dist + "/" + request.URL.Path
-		bs, err := ioutil.ReadFile(path)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		writer.Header().Set("Content-Length", strconv.Itoa(len(bs)))
-		writer.Write(bs)
-	})
+	mux.Handle("/", http.FileServer(http.Dir(config.Dist)))
 	return http.ListenAndServe(":8080", mux)
 }
