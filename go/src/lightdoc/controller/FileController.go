@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"io/ioutil"
 	"lightdoc/config"
 	"net/http"
@@ -11,7 +12,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 	path := config.Root + "/" + r.URL.Path
 	bs, err := ioutil.ReadFile(path)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	w.Header().Set("Content-Length", strconv.Itoa(len(bs)))
