@@ -3,6 +3,7 @@ package model
 import (
 	"io/ioutil"
 	"lightdoc/config"
+	"path"
 )
 
 type Node struct {
@@ -19,16 +20,29 @@ func InitTree(path string) (tree *Node) {
 	tree.Filelist(path)
 	return
 }
-func (tree *Node) Filelist(path string) {
+func (tree *Node) Filelist(p string) {
 	if tree.Nodes == nil {
 		tree.Nodes = make([]Node, 0)
 	}
-	files, _ := ioutil.ReadDir(path)
+	files, _ := ioutil.ReadDir(p)
 	for _, f := range files {
-		childdir := path + "/" + f.Name()
+		if !f.IsDir() {
+			sname := path.Ext(f.Name())
+			switch sname {
+			case ".md":
+				{
+
+				}
+			default:
+				continue
+			}
+		}
+
+		childdir := p + "/" + f.Name()
 
 		childnode := new(Node)
 		childnode.IsDir = f.IsDir()
+
 		childnode.Path = childdir[len(config.Root):]
 		childnode.Name = f.Name()
 		childnode.Filelist(childdir)
