@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="logo-container">
 		<div class="logo">
 			<img v-if="url" :src=url />
 		</div>
@@ -14,7 +14,7 @@ export default {
 	},
 	data () {
 		return {
-			url:''
+			url:'@/assets/logo.jpg'
 		}
 	},
 	mounted(){
@@ -30,14 +30,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-	.container
+	.logo-container
 		height:50px
 		width:100%
 		background:#fff
-		display:flex
-		flex-direction:row
-		justify-content:center
-		align-items:center
+		margin-left:35%
 		.logo
 			width:50px
 			height:50px

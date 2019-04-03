@@ -66,7 +66,7 @@ export default {
 		overflow :auto
 		width:30%
 		min-width:200px
-		height:105%
+		height:100%
 		//background-color:#ccc
 		max-width:224px
 		border-right:1px solid #ccc
