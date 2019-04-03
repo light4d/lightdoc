@@ -11,7 +11,6 @@ func Init() error {
 		writer.Header().Set("Access-Control-Allow-Origin", "*")                  //允许访问所有域
 		writer.Header().Set("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH") //允许访问所有域
 		writer.Header().Add("Access-Control-Allow-Headers", "Content-Type")      //header的类型
-		writer.Header().Set("content-type", "application/json")                  //返回数据格式是json
 		writer.Header().Add("Access-Control-Allow-Credentials", "true")
 		switch request.Method {
 		case http.MethodGet:
