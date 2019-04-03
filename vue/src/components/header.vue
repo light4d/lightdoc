@@ -1,9 +1,8 @@
 <template>
 	<div class="container">
 		<div class="logo">
-			<img src="../../build/logo.png" />
+			<img v-if="url" :src=url />
 		</div>
-		<button class="hidden"><i class="el-icon-tickets"></i></button>
 	</div>
 </template>
 
@@ -14,19 +13,30 @@ export default {
 	components: {
 	},
 	data () {
-		return {}
+		return {
+			url:''
+		}
+	},
+	mounted(){
+		this.axios.options('/api').then((res)=>{
+			let arr = Object.getOwnPropertyNames(res.data); //arr=["one", "two"]
+			
+			let Url = arr.map(function(i){return res.data[i]})
+			this.url = '/api'+Url[0]
+			
+		})
 	}
 }
 </script>
 
 <style lang="stylus" scoped>
 	.container
-		padding:0 20px
-		height:70px
-		background:#CCC
+		height:50px
+		width:100%
+		background:#fff
 		display:flex
 		flex-direction:row
-		justify-content:space-between
+		justify-content:center
 		align-items:center
 		.logo
 			width:50px

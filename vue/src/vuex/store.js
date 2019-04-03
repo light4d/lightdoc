@@ -12,10 +12,30 @@ const state = {
 const mutations = {
   changeValue(state, newValue) {
     state.Path = newValue
-    axios.get('http://localhost:8000' + state.Path).then((res) => {
-      state.readmeContent = marked(res.data)
-      console.log(res)
-    })
+    if (state.Path.Nodes.length>0) {
+      axios.get('/api' + state.Path.Path+'/Readme.md ' )
+        .then((res) => {
+          state.readmeContent = marked(res.data)
+          console.log(res)
+        })
+        .catch((err)=>{
+          console.log(111)
+        })
+    }else{
+       axios.get('/api' + state.Path.Path)
+         .then((res) => {
+           state.readmeContent = marked(res.data)
+           console.log(res,'xia')
+         })
+    }
+    // axios.get('/api' + state.Path)
+    // .then((res) => {
+    //   state.readmeContent = marked(res.data)
+    //   console.log(res)
+    // })
+    // .catch((err)=>{
+    //   alert(err)
+    // })
   }
 }
 export default new Vuex.Store({

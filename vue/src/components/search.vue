@@ -33,6 +33,7 @@
 			display:block
 			height:30px
 			border-bottom:1px solid #ccc
+			border-top:1px solid #ccc
 		.iconSearch
 			position:absolute
 			left:5%
