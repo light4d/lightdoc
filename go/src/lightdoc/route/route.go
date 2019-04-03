@@ -17,6 +17,8 @@ func Init() error {
 			http.FileServer(http.Dir(config.Root)).ServeHTTP(writer, request)
 		case http.MethodPatch:
 			controller.IndexHandler(writer, request)
+		case http.MethodOptions:
+			controller.PictureHandler(writer, request)
 		}
 	})
 	go http.ListenAndServe(":8000", nil)

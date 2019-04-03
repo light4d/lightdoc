@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"lightdoc/config"
 	"path"
+	"strings"
 )
 
 type Node struct {
@@ -31,7 +32,6 @@ func (tree *Node) Filelist(p string) {
 			switch sname {
 			case ".md":
 				{
-
 				}
 			default:
 				continue
@@ -39,12 +39,13 @@ func (tree *Node) Filelist(p string) {
 		}
 
 		childdir := p + "/" + f.Name()
-
 		childnode := new(Node)
 		childnode.IsDir = f.IsDir()
-
 		childnode.Path = childdir[len(config.Root):]
-		childnode.Name = f.Name()
+		fname := path.Base(f.Name())
+		sname := path.Ext(f.Name())
+		filenameOnly := strings.TrimSuffix(fname, sname)
+		childnode.Name = filenameOnly
 		childnode.Filelist(childdir)
 
 		tree.Nodes = append(tree.Nodes, *childnode)
