@@ -17,7 +17,7 @@ func InitPic(path string) (pic *Picture) {
 	return
 }
 
-func (pic *Picture) Piclist(p string) (picture *Picture) {
+func (pic *Picture) Piclist(p string) {
 	files, _ := ioutil.ReadDir(p)
 
 	for _, f := range files {
@@ -35,5 +35,4 @@ func (pic *Picture) Piclist(p string) (picture *Picture) {
 			}
 		}
 	}
-	return
 }
