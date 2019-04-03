@@ -19,7 +19,6 @@ func InitPic(path string) (pic *Picture) {
 
 func (pic *Picture) Piclist(p string) {
 	files, _ := ioutil.ReadDir(p)
-
 	for _, f := range files {
 		if !f.IsDir() {
 			sname := path.Ext(f.Name())
