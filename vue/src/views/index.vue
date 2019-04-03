@@ -1,9 +1,9 @@
 <template>
 	<div class="container">
-	    <v-header></v-header>
+	    <!-- <v-header></v-header> -->
 		<div class="content">
-			<v-aside @updataPath="getPath($event)" class="hidden-xs-only"></v-aside>
-			<v-markdown :Path="path"></v-markdown>
+			<v-aside  ></v-aside>
+			<v-markdown ></v-markdown>
 		</div>
 		
 	</div>
@@ -16,21 +16,15 @@ import smShow from '../components/smShow.vue'
 import 'element-ui/lib/theme-chalk/display.css';
 export default {
 	data (){
-		return {
-			path:[]
-		}
+		return {}
 	},
   components: {
-	vHeader,
 	vAside,
 	vMarkdown,
 	smShow
   },
   methods: {
-		getPath(e){
-			this.path.push(e)
-			debugger
-		}
+		
 	}
 }
 </script>
@@ -38,12 +32,14 @@ export default {
 	.container
 		position:relative
 		display:flex
+		overflow :auto
 		flex-direction:column
 		height:100%
 		.content
 			display:flex
 			flex-direction:row
 			height:100%
+			overflow :hidden
 		@media screen and (max-width:768px)
 			.smShow
 				background:#CCC

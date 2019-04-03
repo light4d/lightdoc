@@ -3,9 +3,8 @@ html {
   background-color: #fff;
   color: #000;
   font-size: 12px;
-	heigth:100%;
-	overflow-x: hidden; 
-	overflow-y: auto; 
+	height:100%;
+	overflow: auto; 
 }
 
 body{

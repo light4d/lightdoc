@@ -18,7 +18,7 @@ export default {
     },
 		
 	mounted(){
-		this.axios.patch('http://localhost:8000').then((res)=>{
+		this.axios.patch('/api').then((res)=>{
 			this.data=res.data.Folder
 			console.log(res)
 		})
