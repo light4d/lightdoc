@@ -9,5 +9,8 @@ sudo docker run  --name=lightdoc  -v hostmddir:/var/lightdoc/  -p 8080:8080 -p 8
  访问端口
  * 8080
  为前端提供的代理端口
+ ## logo
+ 将logo放入hostmddir文件夹
+ 
 
 
