@@ -68,6 +68,6 @@ export default {
 		min-width:200px
 		height:100%
 		//background-color:#ccc
-		max-width:224px
+		max-width:240px
 		border-right:1px solid #ccc
 </style>

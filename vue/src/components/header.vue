@@ -1,7 +1,7 @@
 <template>
 	<div class="logo-container">
 		<div class="logo">
-			<img v-if="url" :src=url />
+			<img v-if="url" src='http://localhost:8000/logo.jpg' />
 		</div>
 	</div>
 </template>
@@ -18,13 +18,13 @@ export default {
 		}
 	},
 	mounted(){
-		this.axios.options('http://localhost:8000').then((res)=>{
-			let arr = Object.getOwnPropertyNames(res.data); //arr=["one", "two"]
+		// this.axios.options('http://localhost:8000').then((res)=>{
+		// 	let arr = Object.getOwnPropertyNames(res.data); //arr=["one", "two"]
 			
-			let Url = arr.map(function(i){return res.data[i]})
-			this.url = 'http://localhost:8000'+Url[0]
+		// 	let Url = arr.map(function(i){return res.data[i]})
+		// 	this.url = 'http://localhost:8000'+Url[0]
 			
-		})
+		// })
 	}
 }
 </script>

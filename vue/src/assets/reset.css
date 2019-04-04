@@ -135,3 +135,22 @@ a {
 .fn-clear {
   *zoom: 1;
 }
+
+table {
+  border: 1px solid #000;
+}
+
+th {
+  border: 1px solid #000;
+  text-align: center;
+}
+
+tr {
+  border: 1px solid #000;
+}
+
+td {
+  border: 1px solid;
+  padding: 2px 3px;
+  text-align: center;
+}

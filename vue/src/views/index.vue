@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="z-container">
 	    <!-- <v-header></v-header> -->
 		<div class="content">
 			<v-aside  ></v-aside>
@@ -29,7 +29,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-	.container
+	.z-container
+		width:100%
 		position:relative
 		display:flex
 		overflow :auto
@@ -37,6 +38,7 @@ export default {
 		height:100%
 		.content
 			display:flex
+			width:100%
 			flex-direction:row
 			height:100%
 			overflow :hidden

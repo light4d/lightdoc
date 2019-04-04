@@ -1,5 +1,5 @@
 <template>
-	<div class="container" v-html="this.$store.state.readmeContent">	
+	<div class="m-container" v-html="this.$store.state.readmeContent">	
 	</div>
 </template>
 
@@ -58,7 +58,8 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../assets/monokai-sublime.css'
-.container
+.m-container
   padding:0 30px 0 30px
   overflow :auto
+  width:100%
 </style>
