@@ -1,6 +1,6 @@
 <template>
 		<div class="search">
-			<input class="inpt" v-model="searchContent" placeholder="请输入搜索内容" />
+			<input disabled class="inpt" v-model="searchContent" placeholder="搜索暂不可用！" />
 			<i class="el-icon-search iconSearch"></i>
 		</div>
 </template>
@@ -29,11 +29,12 @@
 		position:relative
 		.inpt
 			width:100%
-			text-indent:30px
+			text-indent:40px
 			display:block
 			height:30px
-			border-bottom:1px solid #ccc
-			border-top:1px solid #ccc
+			background :rgba(0,0,0,.1)
+			// border-bottom:1px solid #ccc
+			// border-top:1px solid #ccc
 		.iconSearch
 			position:absolute
 			left:5%

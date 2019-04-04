@@ -48,9 +48,11 @@ export default {
 
 <style lang="stylus" scoped>
 	.aside-container >>> .el-tree-node__content
-		border-left:2px solid #00a0e9
+		border-left:1px solid #00a0e9
 		margin-left:20px
 		padding-left:20px !important
+		padding-top 8px
+		padding-bottom:8px
 	.aside-container >>> .el-tree-node>.el-tree-node__children
 		padding-left:10px
 	.aside-container >>> .el-tree-node__expand-icon
@@ -59,15 +61,21 @@ export default {
 	// .container >>> .el-tree-node:focus > .el-tree-node__content
 	// 	background:#c7ceb2
 	.aside-container >>> .el-tree-node:focus > .el-tree-node__content
-		border-left:6px solid #00a0e9
+		border-left:3px solid #00a0e9
+		color :#00a0e9
+		font-weight:800
+	.aside-container >>>  .el-tree-node__content:hover
+		background:rgba(0,160,233,.1)
+		color:#00a0e9
+		font-weight :800
 	.aside-container
 		display:flex
 		flex-direction:column
 		overflow :auto
-		width:30%
+		width:25%
 		min-width:200px
 		height:100%
 		//background-color:#ccc
-		max-width:240px
+		//max-width:240px
 		border-right:1px solid #ccc
 </style>

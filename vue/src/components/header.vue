@@ -1,7 +1,7 @@
 <template>
 	<div class="logo-container">
 		<div class="logo">
-			<img v-if="url" src='http://localhost:8000/logo.jpg' />
+			<img v-if="url" :src='urllogo?urllogo:url' />
 		</div>
 	</div>
 </template>
@@ -14,7 +14,8 @@ export default {
 	},
 	data () {
 		return {
-			url:'@/assets/logo.jpg'
+			url:'@/assets/logo.jpg',
+			urllogo:'http://localhost:8000/logo.jpg'
 		}
 	},
 	mounted(){
@@ -38,6 +39,9 @@ export default {
 		.logo
 			width:50px
 			height:50px
+			border:1px solid #fff
+			border-radius:50%
+			overflow: hidden
 			img
 				width:100%
 				height:100%

@@ -13,6 +13,7 @@ sudo docker run  --name=lightdoc  -v hostmddir:/var/lightdoc/  -p 8080:8080 -p 8
  为前端提供的代理端口
  ## logo
  将logo.jpg(或logo.png,logo.gif)放入hostmddir目录下
+ 将hostmddir换成自己文件夹路径 例如： sudo docker run  --name=lightdoc  -v hostmddir:/var/lightdoc/  -p 8080:8080 -p 8000:8000 light4d/lightdoc/lightdoc
  
 
 

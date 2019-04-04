@@ -23,10 +23,13 @@ body{
   font-size: 100%
 } */
 
-/* h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: tahoma, arial, "Hiragino Sans GB", "微软雅黑", simsun, sans-serif
-} */
+}
 
+p {
+  line-height: 22px;
+}
 /* h1, h2, h3, h4, h5, h6, b, strong {
   font-weight: normal
 } */
@@ -137,20 +140,22 @@ a {
 }
 
 table {
-  border: 1px solid #000;
+  border: 1px solid rgba(0, 0, 0, .2);
+  font-size: 13px;
 }
 
 th {
-  border: 1px solid #000;
+  border: 1px solid rgba(0, 0, 0, .2);
   text-align: center;
+  padding: 5px
 }
 
 tr {
-  border: 1px solid #000;
+  border: 1px solid rgba(0, 0, 0, .2);
 }
 
 td {
-  border: 1px solid;
-  padding: 2px 3px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  padding: 5px 10px;
   text-align: center;
 }
