@@ -4,7 +4,7 @@
 ## ![概述](doc/prd.md)
 ## 使用方法
 ```
-sudo docker run  --name=lightdoc  -v hostmddir:/var/lightdoc/  -p 8080:8080 -p 8000:8000  -it light4d/lightdoc
+sudo docker run  --name=lightdoc  -v hostmddir:/var/lightdoc/  -p 8080:8080 -p 8000:8000 light4d/lightdoc
 ``` 
  ## 开放端口
  * 8000 
