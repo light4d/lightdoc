@@ -13,7 +13,7 @@ const mutations = {
   changeValue(state, newValue) {
     state.Path = newValue
     if (state.Path.Nodes.length>0) {
-      axios.get('/api' + state.Path.Path+'/Readme.md ' )
+      axios.get('http://localhost:8000' + state.Path.Path + '/Readme.md ')
         .then((res) => {
           state.readmeContent = marked(res.data)
           console.log(res)
@@ -22,7 +22,7 @@ const mutations = {
           console.log(111)
         })
     }else{
-       axios.get('/api' + state.Path.Path)
+      axios.get('http://localhost:8000' + state.Path.Path)
          .then((res) => {
            state.readmeContent = marked(res.data)
            console.log(res,'xia')

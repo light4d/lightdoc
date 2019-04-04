@@ -18,11 +18,11 @@ export default {
 		}
 	},
 	mounted(){
-		this.axios.options('/api').then((res)=>{
+		this.axios.options('http://localhost:8000').then((res)=>{
 			let arr = Object.getOwnPropertyNames(res.data); //arr=["one", "two"]
 			
 			let Url = arr.map(function(i){return res.data[i]})
-			this.url = '/api'+Url[0]
+			this.url = 'http://localhost:8000'+Url[0]
 			
 		})
 	}

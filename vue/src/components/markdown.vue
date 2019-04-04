@@ -20,7 +20,7 @@ export default {
         };
     },
 	mounted(){
-    this.axios.get('/api/Readme.md ' )
+    this.axios.get('http://localhost:8000/Readme.md ' )
         .then((res) => {
          this.$store.state.readmeContent = marked(res.data)
         })
