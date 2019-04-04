@@ -36,8 +36,19 @@ func (tree *Node) Filelist(p string) {
 			default:
 				continue
 			}
-		}
+		} else {
+			sname := path.Ext(f.Name())
+			switch sname {
+			case ".git":
+			case ".vscode":
+			case ".idea":
+				{
+					continue
+				}
+			default:
 
+			}
+		}
 		childdir := p + "/" + f.Name()
 		childnode := new(Node)
 		childnode.IsDir = f.IsDir()
