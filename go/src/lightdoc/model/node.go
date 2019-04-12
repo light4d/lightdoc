@@ -33,6 +33,9 @@ func (tree *Node) Filelist(p string) {
 			case ".md":
 				{
 				}
+			case ".pdf":
+				{
+				}
 			default:
 				continue
 			}
