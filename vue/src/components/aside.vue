@@ -1,8 +1,8 @@
 <template>
-	<div class="aside-container">
+	<div class="aside-container" @mousedown.stop="handleWidth" :style="{width:this.$store.state.number+'px'}">
 		<v-header></v-header>
 		<v-search></v-search>
-		<div class="tree">
+		<div class="tree" >
 			<!-- <v-tree></v-tree> -->
 			<el-tree  :data="data" :props="defaultProps" @node-click="handleNodeClick">
 			</el-tree>
@@ -22,6 +22,7 @@ export default {
           children: 'Nodes',
           label: 'Name'
 				},
+				W:0,
 				readmeContent:{}
       };
     },
@@ -31,8 +32,12 @@ export default {
 		},
 		mounted(){
 			
-			this.axios.patch('http://localhost:8000').then((res)=>{
+			this.axios.patch('http://localhost:8000')
+			.then((res)=>{
 				this.data=res.data.Nodes
+			})
+			.catch((err)=>{
+				console.log('没有文件')
 			})
 		},
     methods: {
@@ -41,7 +46,30 @@ export default {
 				 //this.axios.get('/api/'+data.Path)
 				//this.$emit('updataPath',data.Path)
 				this.$store.commit('changeValue',data)
-      }
+			},
+			handleWidth(e){
+				e.preventDefault()
+				let self=this
+				let disX = e.clientX
+				console.log(disX,'siisisi')
+				if(disX<190||disX>210){
+					return
+				}else{
+					document.onmousemove=function(e){
+					e.preventDefault()
+					this.W = e.clientX-disX				
+
+					self.$store.state.number=200+this.W 
+					}
+					document.onmouseup=function(){
+						console.log('quxiao')
+						document.onmousedown=null
+						document.onmousemove=null
+					}
+				}
+				
+			},
+		
     }
 }
 </script>
@@ -72,9 +100,9 @@ export default {
 		display:flex
 		flex-direction:column
 		overflow :auto
-		width:25%
 		min-width:200px
 		height:100%
+		overflow :hidden
 		//background-color:#ccc
 		//max-width:240px
 		border-right:1px solid #ccc

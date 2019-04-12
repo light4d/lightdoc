@@ -15,7 +15,7 @@ export default {
 	data () {
 		return {
 			url:'@/assets/logo.jpg',
-			urllogo:'http://localhost:8000/logo.jpg'
+			urllogo:'http://localhost/logo.jpg'
 		}
 	},
 	mounted(){
