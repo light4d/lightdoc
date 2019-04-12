@@ -15,7 +15,11 @@ const mutations = {
     state.Path = newValue
    
     if (state.Path.Nodes.length>0) {
-      console.log(state,'rademe')
+      for(let i=0;i<state.Path.Nodes.length;i++){
+        if(state.Path.Nodes[i].Path.indexOf('.md')==-1){
+          return
+        }
+      }
       axios.get('http://localhost:8000' + state.Path.Path + '/Readme.md ')
         .then((res) => {
           state.readmeContent = marked(res.data)
@@ -31,18 +35,18 @@ const mutations = {
         window.open('http://localhost:8000'+state.Path.Path)
         return
       }
-      // if(state.Path.Path.indexOf('.md')>-1){
-      //   axios.get('http://192.168.2.23:8000' + state.Path.Path)
-      //   .then((res) => {
-      //     console.log(res,'pdf')
+      if(state.Path.Path.indexOf('.md')>-1){
+        axios.get('http://localhost:8000' + state.Path.Path)
+        .then((res) => {
+          console.log(res,'pdf')
           
-      //     state.readmeContent = marked(res.data)
-      //   })
-      //   .catch((err)=>{
+          state.readmeContent = marked(res.data)
+        })
+        .catch((err)=>{
           
-      //     console.log('errStort')
-      //   })
-      // }
+          console.log('errStort')
+        })
+      }
       
     }
     // axios.get('/api' + state.Path)
