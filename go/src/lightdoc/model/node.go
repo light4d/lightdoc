@@ -31,6 +31,7 @@ func (tree *Node) Filelist(p string) {
 			sname := path.Ext(f.Name())
 			switch sname {
 			case ".md":
+			case ".pdf":
 				{
 				}
 			default:

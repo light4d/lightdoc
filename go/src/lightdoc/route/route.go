@@ -4,6 +4,7 @@ import (
 	"lightdoc/config"
 	"lightdoc/controller"
 	"net/http"
+	"os"
 )
 
 func Init() error {
@@ -14,7 +15,11 @@ func Init() error {
 		writer.Header().Add("Access-Control-Allow-Credentials", "true")
 		switch request.Method {
 		case http.MethodGet:
-			http.FileServer(http.Dir(config.Root)).ServeHTTP(writer, request)
+			f, err := os.Stat(config.Root + "/" + request.URL.Path)
+			if err == nil && !f.IsDir() {
+				http.FileServer(http.Dir(config.Root)).ServeHTTP(writer, request)
+			}
+
 		case http.MethodPatch:
 			controller.IndexHandler(writer, request)
 		case http.MethodOptions:
