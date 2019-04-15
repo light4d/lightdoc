@@ -1,7 +1,9 @@
 <template>
 	<div class="aside-container" 
-	@mousedown.stop="handleWidth" 
-	:style="{width:this.$store.state.number+'px'}" >
+	@mousedown.stop="handleWidth"
+	@mouseover="handleover"
+	:style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize}" 
+	>
 		<v-header></v-header>
 		<v-search></v-search>
 		<div class="tree" >
@@ -25,6 +27,7 @@ export default {
           label: 'Name'
 				},
 				W:0,
+				resize:'',
 				showdiv:false,//控制鼠标显示样式
 				readmeContent:{}
       };
@@ -60,24 +63,39 @@ export default {
 					return
 				}else{
 					document.onmousemove=function(e){
-					e.preventDefault()
-					if(e.clientX<100){
-						
-					}
-					this.W = e.clientX-clientX	
-					console.log(e.clientX)
+					e.preventDefault()			
+					this.W = e.clientX-clientX					
 					self.$store.state.number=dw+this.W
-					console.log(self.$store.state.number,'self.$store.state.number')
 					}
 					document.onmouseup=function(){
-						
-						
+						self.$store.state.number=''
 						document.onmousedown=null
 						document.onmousemove=null
 					}
 				}
 				
 			},
+			handleover(e){
+				if(e.clientX>e.target.offsetWidth-10&&e.clientX<e.target.offsetWidth+10){
+					this.$store.state.resize='w-resize'
+				}else{
+					this.$store.state.resize=''
+				}
+				let self=this
+				document.onmousemove=function(e){
+					console.log(self.$store.state.number,'122222222222')
+					e.preventDefault()
+					if(e.clientX<e.target.offsetWidth-10||e.clientX>e.target.offsetWidth+10){
+						console.log(self.$store.state.number,'22222222222')
+						self.$store.state.number=''
+					}							
+					
+					}
+					document.onmouseup=function(){
+						document.onmousedown=null
+						document.onmousemove=null
+					}
+			}
     }
 }
 </script>

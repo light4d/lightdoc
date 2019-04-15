@@ -8,7 +8,8 @@ Vue.use(Vuex)
 const state = {
   Path: '',
   readmeContent: '',
-  number:''
+  number:'',
+  resize:''
 }
 const mutations = {
   changeValue(state, newValue) {
