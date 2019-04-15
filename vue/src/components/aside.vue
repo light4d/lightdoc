@@ -1,5 +1,7 @@
 <template>
-	<div class="aside-container" @mousedown.stop="handleWidth" :style="{width:this.$store.state.number+'px'}">
+	<div class="aside-container" 
+	@mousedown.stop="handleWidth" 
+	:style="{width:this.$store.state.number+'px'}" >
 		<v-header></v-header>
 		<v-search></v-search>
 		<div class="tree" >
@@ -17,12 +19,13 @@ import marked from 'marked'
 export default {
 	 data() {
       return {
-        data: [],
+				data: [],
         defaultProps: {
           children: 'Nodes',
           label: 'Name'
 				},
 				W:0,
+				showdiv:false,//控制鼠标显示样式
 				readmeContent:{}
       };
     },
@@ -50,31 +53,38 @@ export default {
 			handleWidth(e){
 				e.preventDefault()
 				let self=this
-				let disX = e.clientX
-				console.log(disX,'siisisi')
-				if(disX<190||disX>210){
+				let clientX = e.clientX
+				let dw=e.target.offsetWidth
+				
+				if(clientX<e.target.offsetWidth-10||clientX>e.target.offsetWidth+10){
 					return
 				}else{
 					document.onmousemove=function(e){
 					e.preventDefault()
-					this.W = e.clientX-disX				
-
-					self.$store.state.number=200+this.W 
+					if(e.clientX<100){
+						
+					}
+					this.W = e.clientX-clientX	
+					console.log(e.clientX)
+					self.$store.state.number=dw+this.W
+					console.log(self.$store.state.number,'self.$store.state.number')
 					}
 					document.onmouseup=function(){
-						console.log('quxiao')
+						
+						
 						document.onmousedown=null
 						document.onmousemove=null
 					}
 				}
 				
 			},
-		
     }
 }
 </script>
 
 <style lang="stylus" scoped>
+	.pointerd
+		cursor:w-resize !important
 	.aside-container >>> .el-tree-node__content
 		border-left:1px solid #00a0e9
 		margin-left:20px
@@ -105,5 +115,5 @@ export default {
 		overflow :hidden
 		//background-color:#ccc
 		//max-width:240px
-		border-right:1px solid #ccc
+		border-right:5px solid #ccc
 </style>

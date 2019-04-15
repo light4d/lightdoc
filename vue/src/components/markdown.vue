@@ -61,5 +61,5 @@ export default {
 .m-container
   padding:0 30px 0 30px
   overflow :auto
-  width:100%
+  // width:100%
 </style>
