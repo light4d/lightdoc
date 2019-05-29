@@ -1,7 +1,7 @@
 <template>
 	<div class="logo-container">
 		<div class="logo">
-			<img v-if="url" :src='urllogo?urllogo:url' />
+			<img v-if="url" src='http://localhost:8000/logo.jpg' />
 		</div>
 	</div>
 </template>
