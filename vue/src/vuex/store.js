@@ -14,11 +14,17 @@ const state = {
 const mutations = {
   changeValue(state, newValue) {
     state.Path = newValue
-   
+    console.log(state.Path)
+    var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
+    console.log(state.Path.Path.match(reg)[0])
+    state.Path.Name = state.Path.Path.match(reg)[0]
+
     if (state.Path.Nodes.length>0) {
       for(let i=0;i<state.Path.Nodes.length;i++){
         if(state.Path.Nodes[i].Path.indexOf('.md')==-1){
           return
+        }else{
+          console.log(state.Path.Nodes[i].Path.match(reg))
         }
       }
       axios.get('http://localhost:8000' + state.Path.Path + '/Readme.md ')
@@ -39,7 +45,7 @@ const mutations = {
       if(state.Path.Path.indexOf('.md')>-1){
         axios.get('http://localhost:8000' + state.Path.Path)
         .then((res) => {
-          console.log(res,'pdf')
+          console.log(res,'md')
           
           state.readmeContent = marked(res.data)
         })
@@ -58,6 +64,7 @@ const mutations = {
     // .catch((err)=>{
     //   alert(err)
     // })
+
   }
 }
 export default new Vuex.Store({

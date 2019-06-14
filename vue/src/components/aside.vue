@@ -1,17 +1,26 @@
 <template>
-	<div class="aside-container" 
-	@mousedown.stop="handleWidth"
-	@mouseover="handleover"
-	:style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize}" 
+<div ref="content" class="content">
+	<div class="menu-con" ref="menu" 
+		@mouseover="handleAside" 
+		 >菜单</div>
+	<div class="aside-container" ref="aside"
+		@mousedown.stop="handleWidth"
+		@mouseover="handleover" 
+		@mouseleave="handleHide"
+		:style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize,
+					display:'none'}" 
 	>
-		<v-header></v-header>
+		<v-header @fixed='handleFixed'></v-header>
 		<v-search></v-search>
 		<div class="tree" >
 			<!-- <v-tree></v-tree> -->
-			<el-tree  :data="data" :props="defaultProps" @node-click="handleNodeClick">
+			<el-tree  :data="data" :props="defaultProps" @node-click="handleNodeClick" 
+			 id="el-tree" :render-content="renderContent">
 			</el-tree>
+
 		</div>
 	</div>
+</div>
 </template>
 
 <script>
@@ -24,12 +33,14 @@ export default {
 				data: [],
         defaultProps: {
           children: 'Nodes',
-          label: 'Name'
+					label: 'Name',
+					className:''
 				},
 				W:0,
 				resize:'',
 				showdiv:false,//控制鼠标显示样式
-				readmeContent:{}
+				readmeContent:{},
+				fixed:false
       };
     },
 		components:{
@@ -40,17 +51,33 @@ export default {
 			
 			this.axios.patch('http://localhost:8000')
 			.then((res)=>{
-				this.data=res.data.Nodes
+				this.data =  this.changeName( res.data.Nodes )
+				// for( var i = 0 ; i < res.data.Nodes.length ; i++ ){
+				// 	if( res.data.Nodes[i].Nodes.length == 0 ){
+				// 		var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
+				// 		res.data.Nodes[i].Name = res.data.Nodes[i].Path.match(reg)[0]
+				// 		if( res.data.Nodes[i].Name.indexOf('.md')!=-1 ){
+				// 		}
+				// 	}
+				// 	this.data = res.data.Nodes	
+				// }
 			})
 			.catch((err)=>{
 				console.log('没有文件')
 			})
+			console.log(this.data)
 		},
     methods: {
       handleNodeClick(data) {
-			
 				 //this.axios.get('/api/'+data.Path)
 				//this.$emit('updataPath',data.Path)
+				console.log(data)
+				if( data.Nodes.length > 0 ){
+					for( var i = 0 ; i < data.Nodes.length; i++ ){
+						var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
+						data.Nodes[i].Name = data.Nodes[i].Path.match(reg)[0]
+					}
+				}
 				this.$store.commit('changeValue',data)
 			},
 			handleWidth(e){
@@ -83,18 +110,67 @@ export default {
 				}
 				let self=this
 				document.onmousemove=function(e){
-					console.log(self.$store.state.number,'122222222222')
+					// console.log(self.$store.state.number,'122222222222')
+					
 					e.preventDefault()
 					if(e.clientX<e.target.offsetWidth-10||e.clientX>e.target.offsetWidth+10){
-						console.log(self.$store.state.number,'22222222222')
+						// console.log(self.$store.state.number,'22222222222')
 						self.$store.state.number=''
-					}							
-					
-					}
+					}						
+				}
 					document.onmouseup=function(){
 						document.onmousedown=null
 						document.onmousemove=null
 					}
+			},
+			handleAside(){
+				this.$refs.aside.style.display = 'block';
+				this.$refs.menu.style.display = 'none';
+			},
+			handleHide(){
+				if( this.fixed === true ){
+					return;
+				}
+				this.$refs.aside.style.display = 'none';
+				this.$refs.menu.style.display = 'block';
+			},
+			handleFixed(value){
+				this.fixed = value
+			},
+			changeName(data){
+				console.log(data)
+				if( data.length == 0 ){
+					// console.log(111)
+					// var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
+					// data.Nodes.Name = data.Nodes.Path.match(reg)[0]
+					return;
+				}
+				for( var i = 0 ; i < data.length ; i++ ){
+					console.log(222)
+					if( data[i].Nodes.length == 0 ){
+						console.log(333)
+						var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
+						if( data[i].Path.match(reg) ){
+							data[i].Name = data[i].Path.match(reg)[0]
+							console.log(555,data[i].Name)
+							return data
+						}
+					}else{
+						continue
+					}
+				}
+				return this.changeName( data[i].Nodes )
+			},
+			// el-tree 添加自定义图标
+			renderContent: function (h, {node, data, store}) {
+				if( data.Path.indexOf('.md')!=-1 ){
+					data.className = 'mdicon'
+				}else if( data.Path.indexOf('.pdf')!=-1 ) {
+					data.className = 'pdficon'
+				}else{
+					data.className = 'folder'
+				}
+				return (<span class='icon'><i class={data.className}></i><span style="padding-left: 4px;">{node.label}</span></span>);
 			}
     }
 }
@@ -105,8 +181,8 @@ export default {
 		cursor:w-resize !important
 	.aside-container >>> .el-tree-node__content
 		border-left:1px solid #00a0e9
-		margin-left:20px
-		padding-left:20px !important
+		// margin-left:20px
+		padding-left:10px !important
 		padding-top 8px
 		padding-bottom:8px
 	.aside-container >>> .el-tree-node>.el-tree-node__children
@@ -120,18 +196,70 @@ export default {
 		border-left:3px solid #00a0e9
 		color :#00a0e9
 		font-weight:800
-	.aside-container >>>  .el-tree-node__content:hover
-		background:rgba(0,160,233,.1)
-		color:#00a0e9
-		font-weight :800
+	// .aside-container >>>  .el-tree-node__content:hover
+	// 	background:rgba(0,160,233,.1)
+	// 	color:#00a0e9
+	// 	font-weight :800
 	.aside-container
 		display:flex
 		flex-direction:column
-		overflow :auto
-		min-width:200px
+		overflow : auto
+		min-width : 200px
 		height:100%
-		overflow :hidden
 		//background-color:#ccc
 		//max-width:240px
 		border-right:5px solid #ccc
 </style>
+<style>
+.content{
+	min-width:200px;
+	height:100%;
+	position: relative;
+}
+.menu-con{
+		background-color: rgb(242, 245, 247);
+    box-shadow: rgba(118, 118, 118, 0.11) 2px 0px 5px 0px;
+    opacity: 1;
+    height: 52px;
+    line-height: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    top: 33%;
+    width: 14px;
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 0px 4px 4px 0px;
+    border-width: 1px 1px 1px;
+    border-style: solid solid solid none;
+    border-color: rgb(224, 228, 231) rgb(224, 228, 231) rgb(224, 228, 231);
+    border-image: initial;
+    border-left: none;
+    padding: 6px;
+    transition: right 0.25s ease-in 0.2s, opacity 0.35s ease-in 0.2s;
+}
+
+/* .aside-container .el-tree-node__content:hover{
+	background:#b1eee9 url(../assets/iconfont/-.png) no-repeat left 4px;
+	color:#00a0e9;
+	font-weight :800
+}  */
+.icon .folder{
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	background: url(../assets/iconfont/文件夹.svg) no-repeat left center;
+}
+.icon .mdicon{
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	background: url(../assets/iconfont/markdown-fill.svg) no-repeat left center;
+}
+.el-tree-node__content .icon{
+	    height: 36px;
+			line-height: 36px;
+			display: flex;
+}
+</style>
+

@@ -7,4 +7,3 @@ EXPOSE 8000 8080
 VOLUME ["/var/doc"]
 CMD ["/opt/lightdoc/lightdoc"]
 
-

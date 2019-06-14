@@ -11,6 +11,7 @@ import '@/assets/reset.css'
 import Vuex from 'vuex';
 import store from './vuex/store'
 
+
 Vue.config.productionTip = false
 Vue.use(Vuex);
 Vue.use(VueAxios, axios)

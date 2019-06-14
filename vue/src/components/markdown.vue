@@ -23,6 +23,7 @@ export default {
     this.axios.get('http://localhost:8000/Readme.md ' )
         .then((res) => {
          this.$store.state.readmeContent = marked(res.data)
+
         })
         .catch((err)=>{
           console.log(111)
