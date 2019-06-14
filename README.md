@@ -14,3 +14,4 @@ logo
 ```
 sudo docker run --name=lightdoc -v /media/zh/Data1/CODE/github.com/lightdoc/mdexample:/var/doc/ -p 8080:8080 -p 8000:8000 light4d/lightdoc
 ```
+![gif](./lightdoc.gif)
