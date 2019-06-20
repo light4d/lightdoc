@@ -2,6 +2,7 @@ import marked from 'marked'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import {baseUrl} from '../api/config.js'
 
 Vue.use(Vuex)
 
@@ -27,7 +28,7 @@ const mutations = {
           console.log(state.Path.Nodes[i].Path.match(reg))
         }
       }
-      axios.get('http://localhost:8000' + state.Path.Path + '/Readme.md ')
+      axios.get(`${baseUrl}` + state.Path.Path + '/Readme.md ')
         .then((res) => {
           state.readmeContent = marked(res.data)
           console.log(res)
@@ -39,11 +40,11 @@ const mutations = {
       console.log(state,'pdf')
       if(state.Path.Path.indexOf('.pdf')>-1){
         console.log('这是pdf文件')
-        window.open('http://localhost:8000'+state.Path.Path)
+        window.open(`${baseUrl}`+state.Path.Path)
         return
       }
       if(state.Path.Path.indexOf('.md')>-1){
-        axios.get('http://localhost:8000' + state.Path.Path)
+        axios.get(`${baseUrl}` + state.Path.Path)
         .then((res) => {
           console.log(res,'md')
           

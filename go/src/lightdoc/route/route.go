@@ -28,8 +28,10 @@ func Init() error {
 			controller.PictureHandler(writer, request)
 		}
 	})
-	go http.ListenAndServe(":8000", nil)
+
+	go http.ListenAndServe(":8050", nil)
+
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.Dir(config.Dist)))
-	return http.ListenAndServe(":8080", mux)
+	return http.ListenAndServe(":8051", mux)
 }

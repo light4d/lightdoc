@@ -7,6 +7,7 @@
 import marked from 'marked'
 import hljs from "highlight.js"
 import javascript from 'highlight.js/lib/languages/javascript'
+import {baseUrl} from '../api/config.js'
 export default {
 	name:'vMarkdown',
 	props:{
@@ -20,7 +21,7 @@ export default {
         };
     },
 	mounted(){
-    this.axios.get('http://localhost:8000/Readme.md ' )
+    this.axios.get(`${baseUrl}/Readme.md`)
         .then((res) => {
          this.$store.state.readmeContent = marked(res.data)
 
