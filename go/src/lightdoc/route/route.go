@@ -1,8 +1,6 @@
 package route
 
 import (
-	
-	
 	"lightdoc/config"
 	"lightdoc/controller"
 	"net/http"
@@ -22,6 +20,8 @@ func Init() error {
 				http.FileServer(http.Dir(config.Root)).ServeHTTP(writer, request)
 			}
 
+		case http.MethodConnect:
+			writer.Write([]byte(config.Pubip))
 		case http.MethodPatch:
 			controller.IndexHandler(writer, request)
 		case http.MethodOptions:

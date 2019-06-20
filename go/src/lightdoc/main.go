@@ -12,8 +12,11 @@ func main() {
 		config.Root = os.Args[1]
 
 	}
-	if (len(os.Args)>2){
+	if len(os.Args) > 2 {
 		config.Dist = os.Args[2]
+	}
+	if len(os.Args) > 3 {
+		config.Pubip = os.Args[3]
 	}
 	err := route.Init()
 	if err != nil {
