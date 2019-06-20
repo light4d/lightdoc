@@ -8,5 +8,5 @@ RUN cd /opt/lightdoc/vue && npm install && npm run build &&mv /opt/lightdoc/vue/
 EXPOSE 8050 8051
 WORKDIR /opt/lightdoc
 VOLUME ["/var/doc"]
-CMD ["/opt/lightdoc/lightdoc"]
+CMD [".lightdoc"]
 
