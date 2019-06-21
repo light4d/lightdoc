@@ -49,19 +49,9 @@ export default {
 			vHeader
 		},
 		mounted(){
-			
 			this.axios.patch(baseUrl)
 			.then((res)=>{
 				this.data =  this.changeName( res.data.Nodes )
-				// for( var i = 0 ; i < res.data.Nodes.length ; i++ ){
-				// 	if( res.data.Nodes[i].Nodes.length == 0 ){
-				// 		var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-				// 		res.data.Nodes[i].Name = res.data.Nodes[i].Path.match(reg)[0]
-				// 		if( res.data.Nodes[i].Name.indexOf('.md')!=-1 ){
-				// 		}
-				// 	}
-				// 	this.data = res.data.Nodes	
-				// }
 			})
 			.catch((err)=>{
 				console.log('没有文件')
@@ -141,9 +131,6 @@ export default {
 			changeName(data){
 				console.log(data)
 				if( data.length == 0 ){
-					// console.log(111)
-					// var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-					// data.Nodes.Name = data.Nodes.Path.match(reg)[0]
 					return;
 				}
 				for( var i = 0 ; i < data.length ; i++ ){
