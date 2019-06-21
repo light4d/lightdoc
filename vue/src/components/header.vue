@@ -30,7 +30,7 @@ export default {
 			}).then((res)=>{
 			let arr = Object.getOwnPropertyNames(res.data);
 			let Url = arr.map(function(i){return res.data[i]})
-			this.url = `${baseUrl}`+Url[0]
+			this.url = "/"+Url[0]
 		 })
 	},
 	methods: {

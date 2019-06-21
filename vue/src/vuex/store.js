@@ -13,7 +13,7 @@ const state = {
 }
 const mutations = {
   changeValue(state, newValue) {
-    state.Path = newValue
+    state.Path ="/"+ newValue
     console.log(state.Path)
     var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
     var matchs=state.Path.Path.match(reg)
@@ -46,7 +46,7 @@ const mutations = {
       console.log(state,'pdf')
       if(state.Path.Path.indexOf('.pdf')>-1){
         console.log('这是pdf文件')
-        window.open(`${baseUrl}`+state.Path.Path)
+        window.open("/"+state.Path.Path)
         return
       }
       if(state.Path.Path.indexOf('.md')>-1){
