@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
+func TreeHandler(w http.ResponseWriter, r *http.Request) {
 
 	tree := model.InitTree(config.Root)
 	bs, err := json.Marshal(tree)
