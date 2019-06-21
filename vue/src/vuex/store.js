@@ -41,7 +41,7 @@ const mutations = {
           console.log(res)
         })
         .catch((err)=>{
-          console.log(111)
+          console.log(err)
         })
     }else{
       console.log(state,'pdf')
