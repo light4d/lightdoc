@@ -21,10 +21,13 @@ export default {
         };
     },
 	mounted(){
-    this.axios.get(`${baseUrl}/Readme.md`)
+    this.axios({
+				method: 'FILE',
+				url: `${baseUrl}/Readme.md`,
+				data:null,
+			})
         .then((res) => {
          this.$store.state.readmeContent = marked(res.data)
-
         })
         .catch((err)=>{
           console.log(111)

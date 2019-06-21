@@ -1,7 +1,7 @@
 <template>
 	<div class="logo-container">
 		<div class="logo">
-			<img v-if="url" src='http://localhost:8000/logo.jpg' />
+			<img v-if="url"  />
 		</div>
 		<div class="fixed" @click="handlefixed">
 			<img src="@/assets/iconfont/guding.svg" alt="" :class="{'animated':fixed==true}" />
@@ -11,6 +11,7 @@
 
 <script>
 import 'element-ui/lib/theme-chalk/display.css';
+import {baseUrl} from '../api/config.js'
 export default {
 	name:'vHeader',
 	components: {
@@ -18,18 +19,20 @@ export default {
 	data () {
 		return {
 			url:'@/assets/logo.jpg',
-			urllogo:'http://localhost/logo.jpg',
+			urllogo:'',
 			fixed: false
 		}
 	},
 	mounted(){
-		// this.axios.options('http://localhost:8000').then((res)=>{
-		// 	let arr = Object.getOwnPropertyNames(res.data); //arr=["one", "two"]
-			
-		// 	let Url = arr.map(function(i){return res.data[i]})
-		// 	this.url = 'http://localhost:8000'+Url[0]
-			
-		// })
+		  this.axios({
+				method: 'LOGO',
+				url: `${baseUrl}`,
+				data:null,
+			}).then((res)=>{
+			let arr = Object.getOwnPropertyNames(res.data);
+			let Url = arr.map(function(i){return res.data[i]})
+			this.url = `${baseUrl}`+Url[0]
+		 })
 	},
 	methods: {
 		handlefixed(){

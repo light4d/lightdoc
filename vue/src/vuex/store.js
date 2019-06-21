@@ -17,9 +17,13 @@ const mutations = {
     state.Path = newValue
     console.log(state.Path)
     var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-    console.log(state.Path.Path.match(reg)[0])
-    state.Path.Name = state.Path.Path.match(reg)[0]
-
+    var matchs=state.Path.Path.match(reg)
+    if(matchs!=null){
+      console.log(matchs[0])
+      state.Path.Name = state.Path.Path.match(reg)[0]
+    }
+   
+    
     if (state.Path.Nodes.length>0) {
       for(let i=0;i<state.Path.Nodes.length;i++){
         if(state.Path.Nodes[i].Path.indexOf('.md')==-1){
@@ -28,8 +32,11 @@ const mutations = {
           console.log(state.Path.Nodes[i].Path.match(reg))
         }
       }
-      axios.get(`${baseUrl}` + state.Path.Path + '/Readme.md ')
-        .then((res) => {
+      axios({
+				method: 'FILE',
+				url: `${baseUrl}` + state.Path.Path + '/Readme.md ',
+				data:null,
+			}).then((res) => {
           state.readmeContent = marked(res.data)
           console.log(res)
         })
@@ -44,7 +51,11 @@ const mutations = {
         return
       }
       if(state.Path.Path.indexOf('.md')>-1){
-        axios.get(`${baseUrl}` + state.Path.Path)
+        axios({
+          method: 'FILE',
+          url: `${baseUrl}` + state.Path.Path,
+          data:null,
+        })
         .then((res) => {
           console.log(res,'md')
           
@@ -57,14 +68,6 @@ const mutations = {
       }
       
     }
-    // axios.get('/api' + state.Path)
-    // .then((res) => {
-    //   state.readmeContent = marked(res.data)
-    //   console.log(res)
-    // })
-    // .catch((err)=>{
-    //   alert(err)
-    // })
 
   }
 }

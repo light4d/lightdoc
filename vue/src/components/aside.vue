@@ -49,7 +49,11 @@ export default {
 			vHeader
 		},
 		mounted(){
-			this.axios.patch(baseUrl)
+			this.axios({
+				method: 'TREE',
+				url: baseUrl,
+				data:null,
+			})
 			.then((res)=>{
 				this.data =  this.changeName( res.data.Nodes )
 			})
@@ -60,8 +64,6 @@ export default {
 		},
     methods: {
       handleNodeClick(data) {
-				 //this.axios.get('/api/'+data.Path)
-				//this.$emit('updataPath',data.Path)
 				console.log(data)
 				if( data.Nodes.length > 0 ){
 					for( var i = 0 ; i < data.Nodes.length; i++ ){
