@@ -2,8 +2,7 @@ import marked from 'marked'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import {baseUrl} from '../api/config.js'
-
+ 
 Vue.use(Vuex)
 
 const state = {
@@ -34,7 +33,7 @@ const mutations = {
       }
       axios({
 				method: 'FILE',
-				url: `${baseUrl}` + state.Path.Path + '/Readme.md ',
+				url: "/" + state.Path.Path + '/Readme.md ',
 				data:null,
 			}).then((res) => {
           state.readmeContent = marked(res.data)
@@ -53,7 +52,7 @@ const mutations = {
       if(state.Path.Path.indexOf('.md')>-1){
         axios({
           method: 'FILE',
-          url: `${baseUrl}` + state.Path.Path,
+          url: "/"+ state.Path.Path,
           data:null,
         })
         .then((res) => {

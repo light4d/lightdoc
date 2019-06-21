@@ -27,7 +27,7 @@
 import vSearch from './search.vue'
 import vHeader from './header.vue'
 import marked from 'marked'
-import {baseUrl} from '../api/config.js'
+ 
 export default {
 	 data() {
       return {
@@ -51,7 +51,7 @@ export default {
 		mounted(){
 			this.axios({
 				method: 'TREE',
-				url: baseUrl,
+				url: "/",
 				data:null,
 			})
 			.then((res)=>{

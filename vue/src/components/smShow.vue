@@ -18,10 +18,7 @@ export default {
     },
 		
 	mounted(){
-		this.axios.patch('/api').then((res)=>{
-			this.data=res.data.Folder
-			console.log(res)
-		})
+
 	},
     methods: {
       handleNodeClick(data) {

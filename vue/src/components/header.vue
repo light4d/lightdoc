@@ -11,7 +11,6 @@
 
 <script>
 import 'element-ui/lib/theme-chalk/display.css';
-import {baseUrl} from '../api/config.js'
 export default {
 	name:'vHeader',
 	components: {
@@ -26,7 +25,7 @@ export default {
 	mounted(){
 		  this.axios({
 				method: 'LOGO',
-				url: `${baseUrl}`,
+				url: "/",
 				data:null,
 			}).then((res)=>{
 			let arr = Object.getOwnPropertyNames(res.data);
