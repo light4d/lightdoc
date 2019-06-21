@@ -13,8 +13,9 @@ const state = {
 }
 const mutations = {
   changeValue(state, newValue) {
-    state.Path ="/"+ newValue
+    state.Path = newValue
     console.log(state.Path)
+
     var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
     var matchs=state.Path.Path.match(reg)
     if(matchs!=null){
@@ -33,7 +34,7 @@ const mutations = {
       }
       axios({
 				method: 'FILE',
-				url: "/" + state.Path.Path + '/Readme.md ',
+				url: "/" + state.Path.Path + '/README.md ',
 				data:null,
 			}).then((res) => {
           state.readmeContent = marked(res.data)
