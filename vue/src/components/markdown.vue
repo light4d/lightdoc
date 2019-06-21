@@ -23,7 +23,7 @@ export default {
 	mounted(){
     this.axios({
 				method: 'FILE',
-				url: `${baseUrl}/Readme.md`,
+				url: `${baseUrl}/README.md`,
 				data:null,
 			})
         .then((res) => {

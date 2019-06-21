@@ -1,7 +1,7 @@
 <template>
 	<div class="logo-container">
 		<div class="logo">
-			<img v-if="url"  />
+			<img v-if="url" :url={urllogo} />
 		</div>
 		<div class="fixed" @click="handlefixed">
 			<img src="@/assets/iconfont/guding.svg" alt="" :class="{'animated':fixed==true}" />
@@ -18,8 +18,8 @@ export default {
 	},
 	data () {
 		return {
-			url:'@/assets/logo.jpg',
-			urllogo:'',
+			url:'@/assets/logo.png',
+			urllogo:'@/assets/logo.png',
 			fixed: false
 		}
 	},
