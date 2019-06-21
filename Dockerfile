@@ -1,5 +1,5 @@
 FROM light4d/gonode
-MAINTAINER light4d
+LABEL maintainer="light4d"
 
 ADD go /opt/lightdoc/go
 RUN cd /opt/lightdoc/go/src/lightdoc &&export GOPATH=/opt/lightdoc/go && go get &&mv /opt/lightdoc/go/bin/lightdoc /opt/lightdoc/lightdoc &&rm -rf  /opt/lightdoc/go
