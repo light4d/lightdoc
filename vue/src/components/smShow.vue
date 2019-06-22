@@ -6,25 +6,25 @@
 
 <script>
 export default {
-	name:"smShow",
-	data() {
-      return {
-        data: [],
-        defaultProps: {
-          children: 'Folder',
-          label: 'Name'
-        }
-      };
-    },
-		
-	mounted(){
-
-	},
-    methods: {
-      handleNodeClick(data) {
-        
+  name: 'smShow',
+  data () {
+    return {
+      data: [],
+      defaultProps: {
+        children: 'Folder',
+        label: 'Name'
       }
     }
+  },
+
+  mounted () {
+
+  },
+  methods: {
+    handleNodeClick (data) {
+
+    }
+  }
 }
 </script>
 

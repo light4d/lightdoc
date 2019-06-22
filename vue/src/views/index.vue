@@ -1,31 +1,29 @@
 <template>
 	<div class="z-container">
-	    <!-- <v-header></v-header> -->
 		<div class="content">
 			<v-aside  ></v-aside>
 			<v-markdown ></v-markdown>
 		</div>
-		
+
 	</div>
 </template>
 <script>
-import vHeader from '../components/header.vue'
 import vAside from '../components/aside.vue'
 import vMarkdown from '../components/markdown.vue'
 import smShow from '../components/smShow.vue'
-import 'element-ui/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
-	data (){
-		return {}
-	},
+  data () {
+    return {}
+  },
   components: {
-	vAside,
-	vMarkdown,
-	smShow
+    vAside,
+    vMarkdown,
+    smShow
   },
   methods: {
-		
-	}
+
+  }
 }
 </script>
 <style lang="stylus" scoped>

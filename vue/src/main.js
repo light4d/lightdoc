@@ -8,12 +8,11 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/reset.css'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 import store from './vuex/store'
 
-
 Vue.config.productionTip = false
-Vue.use(Vuex);
+Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
@@ -24,5 +23,3 @@ new Vue({
   store,
   render: h => h(App)
 })
-
-axios.defaults.baseURL = 'http://localhost:8050';

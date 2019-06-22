@@ -10,35 +10,35 @@
 </template>
 
 <script>
-import 'element-ui/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
-	name:'vHeader',
-	components: {
-	},
-	data () {
-		return {
-			url:'@/assets/logo.png',
-			urllogo:'@/assets/logo.png',
-			fixed: false
-		}
-	},
-	mounted(){
-		  this.axios({
-				method: 'LOGO',
-				url: "/",
-				data:null,
-			}).then((res)=>{
-			let arr = Object.getOwnPropertyNames(res.data);
-			let Url = arr.map(function(i){return res.data[i]})
-			this.url = "/"+Url[0]
-		 })
-	},
-	methods: {
-		handlefixed(){
-			this.fixed = !this.fixed
-			this.$emit('fixed' , this.fixed)
-		}
-	},
+  name: 'vHeader',
+  components: {
+  },
+  data () {
+    return {
+      url: '@/assets/logo.png',
+      urllogo: '@/assets/logo.png',
+      fixed: false
+    }
+  },
+  mounted () {
+    this.axios({
+      method: 'LOGO',
+      url: '/',
+      data: null
+    }).then((res) => {
+      let arr = Object.getOwnPropertyNames(res.data)
+      let Url = arr.map(function (i) { return res.data[i] })
+      this.url = '/' + Url[0]
+    })
+  },
+  methods: {
+    handlefixed () {
+      this.fixed = !this.fixed
+      this.$emit('fixed', this.fixed)
+    }
+  }
 }
 </script>
 

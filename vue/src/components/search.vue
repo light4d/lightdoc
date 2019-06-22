@@ -5,23 +5,23 @@
 		</div>
 </template>
 <script>
-	export default{
-		name:"vSearch",
-		data(){
-			return {
-				searchContent:''
-			};
-		},
-		computed:{
-			
-		},
-		methods:{
-			
-		},
-		mounted(){
-		
-		}
-	}
+export default{
+  name: 'vSearch',
+  data () {
+    return {
+      searchContent: ''
+    }
+  },
+  computed: {
+
+  },
+  methods: {
+
+  },
+  mounted () {
+
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
