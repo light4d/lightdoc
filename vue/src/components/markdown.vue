@@ -4,10 +4,10 @@
 </template>
 
 <script>
-import marked from 'marked'
-import hljs from 'highlight.js'
-import javascript from 'highlight.js/lib/languages/javascript'
-export default {
+  import marked from 'marked'
+  import hljs from 'highlight.js'
+
+  export default {
   name: 'vMarkdown',
   props: {
     Node: {
