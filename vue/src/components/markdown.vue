@@ -10,7 +10,7 @@
   export default {
   name: 'vMarkdown',
   props: {
-    Node: {
+    Path: {
       type: Array
     }
   },
