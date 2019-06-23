@@ -135,7 +135,7 @@
         if (data[i].Nodes.length == 0) {
           console.log(333)
           var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-          if (data[i].Node.match(reg)) {
+          if (data[i].Path.match(reg)) {
             data[i].Name = data[i].Path.match(reg)[0]
             console.log(555, data[i].Name)
             return data
