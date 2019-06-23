@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import vSearch from './search.vue'
-import vHeader from './header.vue'
+  import vSearch from './search.vue'
+  import vHeader from './header.vue'
 
-export default {
+  export default {
   data () {
     return {
       data: [],
@@ -136,7 +136,7 @@ export default {
           console.log(333)
           var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
           if (data[i].Node.match(reg)) {
-            data[i].Name = data[i].Node.match(reg)[0]
+            data[i].Name = data[i].Name.match(reg)[0]
             console.log(555, data[i].Name)
             return data
           }
