@@ -14,7 +14,7 @@ const state = {
 const mutations = {
   changeValue (state, newValue) {
     state.Node = newValue
-    console.log(state.Path)
+    console.log(state.Node.Path)
 
     var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
     var matchs = state.Node.Path.match(reg)
@@ -25,10 +25,10 @@ const mutations = {
 
     if (state.Node.Nodes.length > 0) {
       for (let i = 0; i < state.Node.Nodes.length; i++) {
-        if (state.Node.Nodes[i].Node.indexOf('.md') == -1) {
+        if (state.Node.Nodes[i].Path.indexOf('.md') == -1) {
           return
         } else {
-          console.log(state.Node.Nodes[i].Node.match(reg))
+          console.log(state.Node.Nodes[i].Path.match(reg))
         }
       }
       axios({
@@ -44,7 +44,7 @@ const mutations = {
         })
     } else {
       console.log(state, 'pdf')
-      if (state.Path.Node.indexOf('.pdf') > -1) {
+      if (state.Node.Path.indexOf('.pdf') > -1) {
         console.log('这是pdf文件')
         window.open('/' + state.Node.Path)
         return
