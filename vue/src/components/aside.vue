@@ -64,7 +64,7 @@
       if (data.Nodes.length > 0) {
         for (var i = 0; i < data.Nodes.length; i++) {
           var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-          data.Nodes[i].Name = data.Nodes[i].Node.match(reg)[0]
+          data.Nodes[i].Name = data.Nodes[i].Path.match(reg)[0]
         }
       }
       this.$store.commit('changeValue', data)
@@ -148,9 +148,9 @@
     },
     // el-tree 添加自定义图标
     renderContent: function (h, {node, data, store}) {
-      if (data.Node.indexOf('.md') != -1) {
+      if (data.Path.indexOf('.md') != -1) {
         data.className = 'mdicon'
-      } else if (data.Node.indexOf('.pdf') != -1) {
+      } else if (data.Path.indexOf('.pdf') != -1) {
         data.className = 'pdficon'
       } else {
         data.className = 'folder'
