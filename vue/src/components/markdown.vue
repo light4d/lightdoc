@@ -49,7 +49,7 @@
   },
   watch: {
     info () {
-		  this.pathmd = this.Path
+      this.pathmd = this.Path
     }
   },
   methods: {
@@ -61,7 +61,7 @@
 </script>
 
 <style lang="stylus" scoped>
-@import '../assets/monokai-sublime.css'
+@import '../../static/monokai-sublime.css'
 .m-container
   padding:0 30px 0 30px
   overflow :auto
