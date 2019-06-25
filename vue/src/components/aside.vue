@@ -1,227 +1,257 @@
 <template>
-<div ref="content" class="content">
-	<div class="menu-con" ref="menu"
-		@mouseover="handleAside">菜单</div>
-	<div class="aside-container" ref="aside"
-		@mousedown.stop="handleWidth"
-		@mouseover="handleover"
-		@mouseleave="handleHide"
-		:style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize,
+  <div>
+    <div class="menu-con" ref="menu" @mouseover="handleAside">菜单</div>
+    <div
+      class="aside-container"
+      ref="aside"
+      @mousedown.stop="handleWidth"
+      @mouseover="handleover"
+      @mouseleave="handleHide"
+      :style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize,
 					display:'none'}"
-	>
-		<v-header @fixed='handleFixed'></v-header>
-		<v-search></v-search>
-		<div class="tree" >
-			<el-tree  :data="data" :props="defaultProps" @node-click="handleNodeClick" id="el-tree" :render-content="renderContent">
-			</el-tree>
-
-		</div>
-	</div>
-</div>
+    >
+      <v-header @fixed="handleFixed"></v-header>
+      <v-search></v-search>
+      <div class="tree">
+        <el-tree
+          :data="data"
+          :props="defaultProps"
+          @node-click="handleNodeClick"
+          id="el-tree"
+          :render-content="renderContent"
+        ></el-tree>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-  import vSearch from './search.vue'
-  import vHeader from './header.vue'
+import vSearch from "./search.vue";
+import vHeader from "./header.vue";
 
-  export default {
-  data () {
+export default {
+  data() {
     return {
       data: [],
       defaultProps: {
-        children: 'Nodes',
-        label: 'Name',
-        className: ''
+        children: "Nodes",
+        label: "Name",
+        className: ""
       },
       W: 0,
-      resize: '',
+      resize: "",
       showdiv: false, // 控制鼠标显示样式
       readmeContent: {},
       fixed: false
-    }
+    };
   },
   components: {
     vSearch,
     vHeader
   },
-  mounted () {
+  mounted() {
     this.axios({
-      method: 'TREE',
-      url: '/',
+      method: "TREE",
+      url: "/",
       data: null
     })
-      .then((res) => {
-        this.data = this.changeName(res.data.Nodes)
+      .then(res => {
+        this.data = this.changeName(res.data.Nodes);
       })
-      .catch((err) => {
-        console.log('没有文件')
-      })
-    console.log(this.data)
+      .catch(err => {
+        console.log("没有文件");
+      });
+    console.log(this.data);
   },
   methods: {
-    handleNodeClick (data) {
-      console.log(data)
+    handleNodeClick(data) {
+      console.log(data);
       if (data.Nodes.length > 0) {
         for (var i = 0; i < data.Nodes.length; i++) {
-          var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-          data.Nodes[i].Name = data.Nodes[i].Path.match(reg)[0]
+          var reg = /[^<>/\\\|:""\*\?]+\.\w+$/;
+          data.Nodes[i].Name = data.Nodes[i].Path.match(reg)[0];
         }
       }
-      this.$store.commit('changeValue', data)
+      document.title = data.Path;
+      this.$store.commit("changeValue", data);
     },
-    handleWidth (e) {
-      e.preventDefault()
-      let self = this
-      let clientX = e.clientX
-      let dw = e.target.offsetWidth
+    handleWidth(e) {
+      e.preventDefault();
+      let self = this;
+      let clientX = e.clientX;
+      let dw = e.target.offsetWidth;
 
-      if (clientX < e.target.offsetWidth - 10 || clientX > e.target.offsetWidth + 10) {
-
+      if (
+        clientX < e.target.offsetWidth - 10 ||
+        clientX > e.target.offsetWidth + 10
+      ) {
       } else {
-        document.onmousemove = function (e) {
-          e.preventDefault()
-          this.W = e.clientX - clientX
-          self.$store.state.number = dw + this.W
-        }
-        document.onmouseup = function () {
-          self.$store.state.number = ''
-          document.onmousedown = null
-          document.onmousemove = null
-        }
+        document.onmousemove = function(e) {
+          e.preventDefault();
+          this.W = e.clientX - clientX;
+          self.$store.state.number = dw + this.W;
+        };
+        document.onmouseup = function() {
+          self.$store.state.number = "";
+          document.onmousedown = null;
+          document.onmousemove = null;
+        };
       }
     },
-    handleover (e) {
-      if (e.clientX > e.target.offsetWidth - 10 && e.clientX < e.target.offsetWidth + 10) {
-        this.$store.state.resize = 'w-resize'
+    handleover(e) {
+      if (
+        e.clientX > e.target.offsetWidth - 10 &&
+        e.clientX < e.target.offsetWidth + 10
+      ) {
+        this.$store.state.resize = "w-resize";
       } else {
-        this.$store.state.resize = ''
+        this.$store.state.resize = "";
       }
-      let self = this
-      document.onmousemove = function (e) {
+      let self = this;
+      document.onmousemove = function(e) {
         // console.log(self.$store.state.number,'122222222222')
 
-        e.preventDefault()
-        if (e.clientX < e.target.offsetWidth - 10 || e.clientX > e.target.offsetWidth + 10) {
+        e.preventDefault();
+        if (
+          e.clientX < e.target.offsetWidth - 10 ||
+          e.clientX > e.target.offsetWidth + 10
+        ) {
           // console.log(self.$store.state.number,'22222222222')
-          self.$store.state.number = ''
+          self.$store.state.number = "";
         }
-      }
-      document.onmouseup = function () {
-        document.onmousedown = null
-        document.onmousemove = null
-      }
+      };
+      document.onmouseup = function() {
+        document.onmousedown = null;
+        document.onmousemove = null;
+      };
     },
-    handleAside () {
-      this.$refs.aside.style.display = 'block'
-      this.$refs.menu.style.display = 'none'
+    handleAside() {
+      this.$refs.aside.style.display = "block";
+      this.$refs.menu.style.display = "none";
     },
-    handleHide () {
+    handleHide() {
       if (this.fixed === true) {
-        return
+        return;
       }
-      this.$refs.aside.style.display = 'none'
-      this.$refs.menu.style.display = 'block'
+      this.$refs.aside.style.display = "none";
+      this.$refs.menu.style.display = "block";
     },
-    handleFixed (value) {
-      this.fixed = value
+    handleFixed(value) {
+      this.fixed = value;
     },
-    changeName (data) {
-      console.log(data)
+    changeName(data) {
+      console.log(data);
       if (data.length == 0) {
-        return
+        return;
       }
       for (var i = 0; i < data.length; i++) {
-        console.log(222)
+        console.log(222);
         if (data[i].Nodes.length == 0) {
-          console.log(333)
-          var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
+          console.log(333);
+          var reg = /[^<>/\\\|:""\*\?]+\.\w+$/;
           if (data[i].Path.match(reg)) {
-            data[i].Name = data[i].Path.match(reg)[0]
-            console.log(555, data[i].Name)
-            return data
+            data[i].Name = data[i].Path.match(reg)[0];
+            console.log(555, data[i].Name);
+            return data;
           }
         } else {
-          continue
+          continue;
         }
       }
-      return this.changeName(data[i].Nodes)
+      return this.changeName(data[i].Nodes);
     },
     // el-tree 添加自定义图标
-    renderContent: function (h, {node, data, store}) {
-      if (data.Path.indexOf('.md') != -1) {
-        data.className = 'mdicon'
-      } else if (data.Path.indexOf('.pdf') != -1) {
-        data.className = 'pdficon'
+    renderContent: function(h, { node, data, store }) {
+      if (data.Path.indexOf(".md") != -1) {
+        data.className = "mdicon";
+      } else if (data.Path.indexOf(".pdf") != -1) {
+        data.className = "pdficon";
       } else {
-        data.className = 'folder'
+        data.className = "folder";
       }
-      return (<span class='icon'><i class={data.className}></i><span style="padding-left: 4px;">{node.label}</span></span>)
+      return (
+        <span class="icon">
+          <i class={data.className} />
+          <span style="padding-left: 4px;">{node.label}</span>
+        </span>
+      );
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
-	.pointerd
-		cursor:w-resize !important
-	.aside-container >>> .el-tree-node__content
-		border-left:1px solid #00a0e9
-		// margin-left:20px
-		padding-left:10px !important
-		padding-top 8px
-		padding-bottom:8px
-	.aside-container >>> .el-tree-node>.el-tree-node__children
-		padding-left:10px
-	.aside-container >>> .el-tree-node__expand-icon
-		position : absolute
-		left:75%
-	// .container >>> .el-tree-node:focus > .el-tree-node__content
-	// 	background:#c7ceb2
-	.aside-container >>> .el-tree-node:focus > .el-tree-node__content
-		border-left:3px solid #00a0e9
-		color :#00a0e9
-		font-weight:800
-	// .aside-container >>>  .el-tree-node__content:hover
-	// 	background:rgba(0,160,233,.1)
-	// 	color:#00a0e9
-	// 	font-weight :800
-	.aside-container
-		display:flex
-		flex-direction:column
-		overflow : auto
-		min-width : 200px
-		height:100%
-		//background-color:#ccc
-		//max-width:240px
-		border-right:5px solid #ccc
+.pointerd {
+  cursor: w-resize !important;
+}
+
+.aside-container >>> .el-tree-node__content {
+  border-left: 1px solid #00a0e9;
+  // margin-left:20px
+  padding-left: 10px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.aside-container >>> .el-tree-node>.el-tree-node__children {
+  padding-left: 10px;
+}
+
+.aside-container >>> .el-tree-node__expand-icon {
+  position: absolute;
+  left: 75%;
+}
+
+// .container >>> .el-tree-node:focus > .el-tree-node__content
+// background:#c7ceb2
+.aside-container >>> .el-tree-node:focus > .el-tree-node__content {
+  border-left: 3px solid #00a0e9;
+  color: #00a0e9;
+  font-weight: 800;
+}
+
+// .aside-container >>>  .el-tree-node__content:hover
+// background:rgba(0,160,233,.1)
+// color:#00a0e9
+// font-weight :800
+.aside-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  min-width: 200px;
+  height: 100%;
+  // background-color:#ccc
+  max-width: 280px;
+  border-right: 5px solid #ccc;
+}
 </style>
 <style>
-.content{
-	min-width:200px;
-	height:100%;
-	position: relative;
+.content {
+  min-width: 200px;
+  height: 100%;
+  position: relative;
 }
-.menu-con{
-		background-color: rgb(242, 245, 247);
-    box-shadow: rgba(118, 118, 118, 0.11) 2px 0px 5px 0px;
-    opacity: 1;
-    height: 52px;
-    line-height: 2;
-    position: absolute;
-    left: 0;
-    text-align: center;
-    top: 33%;
-    width: 14px;
-    z-index: 2;
-    cursor: pointer;
-    border-radius: 0px 4px 4px 0px;
-    border-width: 1px 1px 1px;
-    border-style: solid solid solid none;
-    border-color: rgb(224, 228, 231) rgb(224, 228, 231) rgb(224, 228, 231);
-    border-image: initial;
-    border-left: none;
-    padding: 6px;
-    transition: right 0.25s ease-in 0.2s, opacity 0.35s ease-in 0.2s;
+.menu-con {
+  background-color: rgb(242, 245, 247);
+  box-shadow: rgba(118, 118, 118, 0.11) 2px 0px 5px 0px;
+  opacity: 1;
+  height: 52px;
+  line-height: 2;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  top: 33%;
+  width: 14px;
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 0px 4px 4px 0px;
+  border-width: 1px 1px 1px;
+  border-style: solid solid solid none;
+  border-color: rgb(224, 228, 231) rgb(224, 228, 231) rgb(224, 228, 231);
+  border-image: initial;
+  border-left: none;
+  padding: 6px;
+  transition: right 0.25s ease-in 0.2s, opacity 0.35s ease-in 0.2s;
 }
 
 /* .aside-container .el-tree-node__content:hover{
@@ -229,19 +259,19 @@
 	color:#00a0e9;
 	font-weight :800
 }  */
-.icon .folder{
-	width: 36px;
-	height: 36px;
-	line-height: 36px;
-	background: url(../assets/iconfont/文件夹.svg) no-repeat left center;
+.icon .folder {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  background: url(../assets/iconfont/文件夹.svg) no-repeat left center;
 }
-.icon .mdicon{
-	width: 36px;
-	height: 36px;
-	line-height: 36px;
-	background: url(../assets/iconfont/markdown-fill.svg) no-repeat left center;
+.icon .mdicon {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  background: url(../assets/iconfont/markdown-fill.svg) no-repeat left center;
 }
-.el-tree-node__content .icon{
+.el-tree-node__content .icon {
   height: 36px;
   line-height: 36px;
   display: flex;
