@@ -1,9 +1,8 @@
 <template>
   <div class="z-container">
-    <vm-back-top></vm-back-top>
     <div class="content">
       <div class="styleSel">
-        <el-select v-model="value" placeholder="样式选择" @change="getValue">
+        <el-select v-model="value" size="small" placeholder="样式选择" @change="getValue">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
         </el-select>
       </div>
@@ -16,8 +15,6 @@
 import vAside from "../components/aside.vue";
 import vMarkdown from "../components/markdown.vue";
 import smShow from "../components/smShow.vue";
-import Vue from "vue";
-import VmBackTop from "vue-multiple-back-top";
 
 import "element-ui/lib/theme-chalk/display.css";
 export default {
@@ -26,15 +23,18 @@ export default {
       options: [
         {
           value: "1",
-          label: "Green"
+          label: "Green",
+          rgb: "#009688"
         },
         {
           value: "2",
-          label: "Blue"
+          label: "Blue",
+          rgb: "#409EFF"
         },
         {
           value: "3",
-          label: "Black"
+          label: "Black",
+          rgb: "#303133"
         }
       ],
       value: ""
@@ -43,10 +43,31 @@ export default {
   components: {
     vAside,
     vMarkdown,
-    smShow,
-    VmBackTop
+    smShow
   },
-  methods: {}
+  methods: {
+    getValue(color) {
+      var elements = [],
+        element = [];
+      var num = 3;
+      element[1] = document.getElementsByTagName("h1");
+      element[2] = document.getElementsByTagName("h2");
+      element[3] = document.getElementsByTagName("h3");
+      element[4] = document.getElementsByTagName("h4");
+      while (num > 0) {
+        if (element[num].length != 0) {
+          elements.push(element[num]);
+          num--;
+        }
+      }
+      console.log(elements);
+      for (var i = 0; i < elements.length; i++) {
+        for (var n = 0; n < elements[i].length; n++) {
+          elements[i][n].style.color = color.rgb;
+        }
+      }
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>

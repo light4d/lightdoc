@@ -11,14 +11,15 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "element-ui": "^2.7.0",
     "highlight.js": "^9.15.6",
-    "marked": "^0.6.1",
+    "marked": "^0.6.2",
     "mavon-editor": "^2.7.3",
     "stylus": "^0.54.5",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
+    "vue-multiple-back-top": "^1.0.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0"
   },

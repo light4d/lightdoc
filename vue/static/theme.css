@@ -16,6 +16,8 @@
     white-space: pre-wrap;
     border-radius: 2px;
     display: inline;
+    color: #f8f8f2;
+    background-color: #272822;
   }
   
   pre {
@@ -120,28 +122,32 @@
     margin: 20px 0 10px;
     padding: 0;
     font-style: bold !important;
-    color: #009688 !important;
-    text-align: center !important;
+    color: #009688;
     margin: 1.5em 5px !important;
     padding: 0.5em 1em !important;
   }
   
   h1 {
+    padding-top: 2.5em;
     font-size: 24px !important;
     border-bottom: 1px solid #ddd !important;
+    text-align: center;
   }
   
   h2 {
     font-size: 20px !important;
     border-bottom: 1px solid #eee !important;
+    text-align: left !important;
   }
   
   h3 {
     font-size: 18px;
+    text-align: left !important;
   }
   
   h4 {
     font-size: 16px;
+    text-align: left !important;
   }
   
   
