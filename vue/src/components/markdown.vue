@@ -1,10 +1,10 @@
 <template>
   <div class="m-container">
-    <h1>我们是最棒的</h1>
-    <h2>Come on!</h2>
-    <h3>lets do this</h3>
-    <h2>yeah</h2>
-    <vm-back-top :bottom="100" :duration="1000" :timing="'ease'"></vm-back-top>
+    <back-to-top bottom="4em" right="4em">
+      <button type="button" class="btn-to-top">
+        <i class="el-icon-caret-top"></i>
+      </button>
+    </back-to-top>
     <div v-html="this.$store.state.readmeContent"></div>
   </div>
 </template>
@@ -12,9 +12,7 @@
 <script>
 import marked from "marked";
 import hljs from "highlight.js";
-import Vue from "vue";
-import VmBackTop from "vue-multiple-back-top";
-import "element-ui/lib/theme-chalk/display.css";
+import BackToTop from "vue-backtotop";
 
 export default {
   name: "vMarkdown",
@@ -29,7 +27,7 @@ export default {
     };
   },
   components: {
-    VmBackTop
+    BackToTop
   },
   mounted() {
     this.axios({

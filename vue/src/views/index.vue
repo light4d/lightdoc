@@ -2,7 +2,7 @@
   <div class="z-container">
     <div class="content">
       <div class="styleSel">
-        <el-select v-model="value" size="small" placeholder="样式选择" @change="getValue">
+        <el-select v-model="value" size="mini" placeholder="样式选择" @change="getValue">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
         </el-select>
       </div>
@@ -16,7 +16,6 @@ import vAside from "../components/aside.vue";
 import vMarkdown from "../components/markdown.vue";
 import smShow from "../components/smShow.vue";
 
-import "element-ui/lib/theme-chalk/display.css";
 export default {
   data() {
     return {
@@ -105,5 +104,20 @@ export default {
   position: absolute;
   right: 100px;
   top: 20px;
+}
+
+.btn-to-top {
+  width: 40px;
+  height: 40px;
+  padding: 10px 10px;
+  border-radius: 50%;
+  color: '#666';
+  font-size: 20px;
+  line-height: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.vue-back-to-top {
+  background-color: '#666' !important;
 }
 </style>
