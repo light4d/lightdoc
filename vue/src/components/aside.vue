@@ -221,7 +221,7 @@ export default {
   min-width: 200px;
   height: 100%;
   // background-color:#ccc
-  max-width: 280px;
+  max-width: 500px;
   border-right: 5px solid #ccc;
 }
 </style>

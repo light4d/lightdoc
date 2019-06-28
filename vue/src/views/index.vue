@@ -2,7 +2,13 @@
   <div class="z-container">
     <div class="content">
       <div class="styleSel">
-        <el-select v-model="value" size="mini" placeholder="样式选择" @change="getValue">
+        <el-select
+          v-model="value"
+          size="mini"
+          placeholder="样式选择"
+          style="width: 100px"
+          @change="getValue"
+        >
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
         </el-select>
       </div>
@@ -102,8 +108,8 @@ export default {
 .styleSel {
   float: right;
   position: absolute;
-  right: 100px;
-  top: 20px;
+  right: 10px;
+  top: 10px;
 }
 
 .btn-to-top {
