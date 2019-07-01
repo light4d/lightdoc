@@ -1,10 +1,5 @@
 <template>
   <div class="m-container">
-    <back-to-top bottom="4em" right="4em">
-      <button type="button" class="btn-to-top">
-        <i class="el-icon-caret-top"></i>
-      </button>
-    </back-to-top>
     <div v-html="this.$store.state.readmeContent"></div>
   </div>
 </template>
@@ -12,7 +7,6 @@
 <script>
 import marked from "marked";
 import hljs from "highlight.js";
-import BackToTop from "vue-backtotop";
 
 export default {
   name: "vMarkdown",
@@ -26,9 +20,7 @@ export default {
       defaultData: "preview"
     };
   },
-  components: {
-    BackToTop
-  },
+  components: {},
   mounted() {
     this.axios({
       method: "FILE",
