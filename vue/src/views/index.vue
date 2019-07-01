@@ -52,19 +52,11 @@ export default {
   },
   methods: {
     getValue(color) {
-      var elements = [],
-        element = [];
-      var num = 3;
-      element[1] = document.getElementsByTagName("h1");
-      element[2] = document.getElementsByTagName("h2");
-      element[3] = document.getElementsByTagName("h3");
-      element[4] = document.getElementsByTagName("h4");
-      while (num > 0) {
-        if (element[num].length != 0) {
-          elements.push(element[num]);
-          num--;
-        }
-      }
+      var elements = [];
+      elements[0] = document.querySelectorAll("h1");
+      elements[1] = document.querySelectorAll("h2");
+      elements[2] = document.querySelectorAll("h3");
+      elements[3] = document.querySelectorAll("h4");
       console.log(elements);
       for (var i = 0; i < elements.length; i++) {
         for (var n = 0; n < elements[i].length; n++) {
