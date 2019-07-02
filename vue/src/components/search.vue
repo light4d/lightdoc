@@ -14,7 +14,7 @@ export default {
   name: "vSearch",
   data() {
     return {
-      searchContent: ""
+      searchContent: "dsf"
     };
   },
   computed: {},
