@@ -4,7 +4,7 @@
     <div
       class="aside-container"
       ref="aside"
-      @mousedown.stop="handleWidth"
+      @mousedown="handleWidth"
       @mouseover="handleover"
       @mouseleave="handleHide"
       :style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize,
@@ -82,8 +82,8 @@ export default {
       let dw = e.target.offsetWidth;
 
       if (
-        clientX < e.target.offsetWidth - 10 ||
-        clientX > e.target.offsetWidth + 10
+        clientX < e.target.offsetWidth - 20 ||
+        clientX > e.target.offsetWidth + 20
       ) {
       } else {
         document.onmousemove = function(e) {
@@ -92,16 +92,16 @@ export default {
           self.$store.state.number = dw + this.W;
         };
         document.onmouseup = function() {
-          self.$store.state.number = "";
-          document.onmousedown = null;
+          //self.$store.state.number = "";
+          //document.onmousedown = null;
           document.onmousemove = null;
         };
       }
     },
     handleover(e) {
       if (
-        e.clientX > e.target.offsetWidth - 10 &&
-        e.clientX < e.target.offsetWidth + 10
+        e.clientX > e.target.offsetWidth - 20 &&
+        e.clientX < e.target.offsetWidth + 20
       ) {
         this.$store.state.resize = "w-resize";
       } else {
@@ -113,8 +113,8 @@ export default {
 
         e.preventDefault();
         if (
-          e.clientX < e.target.offsetWidth - 10 ||
-          e.clientX > e.target.offsetWidth + 10
+          e.clientX < e.target.offsetWidth - 20 ||
+          e.clientX > e.target.offsetWidth + 20
         ) {
           // console.log(self.$store.state.number,'22222222222')
           self.$store.state.number = "";
@@ -231,6 +231,11 @@ export default {
   height: 100%;
   position: relative;
 }
+
+.tree {
+  margin-right: 15px;
+}
+
 .menu-con {
   background-color: rgb(242, 245, 247);
   box-shadow: rgba(118, 118, 118, 0.11) 2px 0px 5px 0px;
