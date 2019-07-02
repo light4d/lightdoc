@@ -14,12 +14,14 @@ func Init() error {
 		writer.Header().Add("Access-Control-Allow-Headers", "Content-Type")          //header的类型
 		writer.Header().Add("Access-Control-Allow-Credentials", "true")
 		switch request.Method {
-		case "FILE":
+
+		case http.MethodGet:
 			f, err := os.Stat(config.Root + "/" + request.URL.Path)
 			if err == nil && !f.IsDir() {
 				http.FileServer(http.Dir(config.Root)).ServeHTTP(writer, request)
+				break
 			}
-		case http.MethodGet:
+
 			F := http.FileServer(http.Dir(config.Dist))
 			F.ServeHTTP(writer, request)
 		case "TREE":

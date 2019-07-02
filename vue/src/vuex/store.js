@@ -32,7 +32,7 @@ const mutations = {
         }
       }
       axios({
-        method: 'FILE',
+        method: 'GET',
         url: state.Node.Path + '/README.md ',
         data: null
       }).then((res) => {
@@ -51,7 +51,7 @@ const mutations = {
       }
       if (state.Node.Path.indexOf('.md') > -1) {
         axios({
-          method: 'FILE',
+          method: 'GET',
           url: state.Node.Path,
           data: null
         })
