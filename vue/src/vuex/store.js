@@ -45,8 +45,8 @@ const mutations = {
     } else {
       console.log(state, 'pdf')
       if (state.Node.Path.indexOf('.pdf') > -1) {
-        console.log('这是pdf文件')
-        window.open('/' + state.Node.Path)
+
+        window.open(state.Node.Path)
         return
       }
       if (state.Node.Path.indexOf('.md') > -1) {
@@ -57,7 +57,6 @@ const mutations = {
         })
           .then((res) => {
             console.log(res, 'md')
-
             state.readmeContent = marked(res.data)
           })
           .catch((err) => {
