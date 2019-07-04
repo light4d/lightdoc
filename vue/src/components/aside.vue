@@ -80,7 +80,7 @@ export default {
         }
       }
       document.title = data.Path;
-      this.$router.push({ name: "user", params: { pageId: data.Path } });
+      this.$router.push({ name: "content", params: { pageId: data.Path } });
       console.log(this.$route);
 
       this.$store.commit("changeValue", data);

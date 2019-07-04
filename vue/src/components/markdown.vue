@@ -21,10 +21,10 @@ export default {
     };
   },
   components: {},
-  mounted() {
+  created() {
     this.axios({
       method: "FILE",
-      url: `/README.md`,
+      url: this.$route.params.pageId,
       data: null
     })
       .then(res => {
@@ -33,6 +33,7 @@ export default {
       .catch(err => {
         console.log(111);
       });
+    console.log(this.$store.state.readmeContent);
     marked.setOptions({
       renderer: new marked.Renderer(),
       highlight: function(readmeContent) {
@@ -50,7 +51,7 @@ export default {
   },
   watch: {
     info() {
-      this.pathmd = this.Path;
+      this.Path = this.$route.params.pageId;
     }
   },
   methods: {
