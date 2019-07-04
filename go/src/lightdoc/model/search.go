@@ -5,18 +5,34 @@ import (
 	"lightdoc/config"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
-func SerchKeyWords(k string) []string {
+type Searchresult struct {
+	Path       string
+	Key        string
+	Isfilename bool
+}
+type Allsearchresult []Searchresult
+
+func SerchKeyWords(key string) Allsearchresult {
 	fileindex := SerchTextfile(config.Root)
-	webpage := []string{}
+	allresult := Allsearchresult{}
 	for i, v := range fileindex {
-		if Isinthere(k, i) || IsName(k, v) {
-			webpage = append(webpage, i)
+		if IsName(key, v) {
+			newpath := i[len(config.Root):]
+			webpage := Searchresult{newpath, "", true}
+			allresult = append(allresult, webpage)
+		}
+		if Isinthere(key, i) {
+			newpath := i[len(config.Root):]
+			keywords := SearchText(key, i)
+			webpage := Searchresult{newpath, keywords, false}
+			allresult = append(allresult, webpage)
 		}
 	}
-	return webpage
+	return allresult
 }
 
 func SerchTextfile(path string) map[string]string {
@@ -48,15 +64,57 @@ func IsName(k string, t string) bool {
 	return strings.Contains(t, k)
 }
 
-//文件名匹配
+//查询key是否与文件名匹配
 
 func Isinthere(k string, path string) bool {
-	d, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
-	str := string(d)
-	return strings.Contains(str, k)
+	ed, _ := ioutil.ReadFile(path)
+	a := string(ed)
+	re, _ := regexp.Compile("!\\[[^\\]]+\\]\\([^\\)]+\\)")
+	a = re.ReplaceAllString(a, "")
+	re, _ = regexp.Compile("(\\[.+\\]\\([^\\)]+\\))|(<.+>)")
+	a = re.ReplaceAllString(a, "")
+	re, _ = regexp.Compile("[\\\\\\`\\*\\_\\[\\]\\#\\+\\-\\!\\>]")
+	a = re.ReplaceAllString(a, "")
+	re, _ = regexp.Compile("\n")
+	a = re.ReplaceAllString(a, "")
+
+	return strings.Contains(a, k)
 }
 
-//内容匹配
+//查询key是否存在于文件内
+
+func SearchText(key string, path string) string {
+	ed, _ := ioutil.ReadFile(path)
+	a := string(ed)
+	re, _ := regexp.Compile("!\\[[^\\]]+\\]\\([^\\)]+\\)")
+	a = re.ReplaceAllString(a, "")
+	re, _ = regexp.Compile("(\\[.+\\]\\([^\\)]+\\))|(<.+>)")
+	a = re.ReplaceAllString(a, "")
+	re, _ = regexp.Compile("[\\\\\\`\\*\\_\\[\\]\\#\\+\\-\\!\\>]")
+	a = re.ReplaceAllString(a, "")
+	re, _ = regexp.Compile("\n")
+	a = re.ReplaceAllString(a, "")
+
+	end, nk := []rune(a), []rune(key)
+
+	index := SearchIndex(end, nk)
+	indexstart := 0
+	indexend := len(a) - 1
+	if index-30 >= 0 {
+		indexstart = index - 30
+	}
+	if indexstart+30 <= len(a)-1 {
+		indexend = index + 30
+	}
+	//避免越界
+	return string(end[indexstart:indexend])
+}
+
+func SearchIndex(b, k []rune) int {
+	for i := 0; i < len(b)-len(k)-1; i++ {
+		if string(b[i:i+len(k)-1]) == string(k) {
+			return i
+		}
+	}
+	return -1
+}
