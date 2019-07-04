@@ -66,7 +66,6 @@ export default {
 // @import '../../static/monokai-sublime.css';
 .m-container {
   padding: 0 30px 0 30px;
-  overflow: auto;
   width: 100%;
 }
 </style>

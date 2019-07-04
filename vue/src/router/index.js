@@ -9,7 +9,7 @@ export default new Router({
       component: resolve => require(['@/views/index.vue'], resolve),
       children: [
         {
-          path: '/content/:pageId',
+          path: '/doc/:pageId',
           name: 'content',
           //component: () => import('@/components/markdown.vue')
           component: resolve => require(['@/views/index.vue'], resolve),

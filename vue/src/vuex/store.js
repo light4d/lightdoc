@@ -9,10 +9,11 @@ const state = {
   Node: {},
   readmeContent: '',
   number: '',
-  resize: ''
+  resize: '',
+  fixed: false
 }
 const mutations = {
-  changeValue (state, newValue) {
+  changeValue(state, newValue) {
     state.Node = newValue
     console.log(state.Node.Path)
 

@@ -12,8 +12,11 @@
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
         </el-select>
       </div>
-      <v-aside></v-aside>
-      <v-markdown></v-markdown>
+      <div id="sidebar">
+        <v-aside></v-aside>
+        <div id="split-bar" v-if="this.$store.state.fixed"  @mousedown="resize"></div>
+      </div>
+      <v-markdown id="main"></v-markdown>
     </div>
   </div>
 </template>
@@ -21,6 +24,7 @@
 import vAside from "../components/aside.vue";
 import vMarkdown from "../components/markdown.vue";
 import smShow from "../components/smShow.vue";
+import $ from "jquery";
 
 export default {
   data() {
@@ -63,7 +67,26 @@ export default {
           elements[i][n].style.color = color.rgb;
         }
       }
+    },
+    resize(e) {
+      e.preventDefault();
+      var min = 300;
+      var max = 3600;
+      var mainmin = 200;
+      $(document).mousemove(function(e) {
+        e.preventDefault();
+        var x = e.pageX - $("#sidebar").offset().left;
+        if (x > min && x < max && e.pageX < $(window).width() - mainmin) {
+          $("#sidebar").css("width", x);
+          $("#main").css("margin-left", x);
+        }
+      });
     }
+  },
+  mounted() {
+    $(document).mouseup(function(e) {
+      $(document).unbind("mousemove");
+    });
   }
 };
 </script>
@@ -71,51 +94,34 @@ export default {
 .z-container {
   width: 100%;
   position: relative;
-  display: flex;
   overflow: auto;
-  flex-direction: column;
   height: 100%;
-
-  .content {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  @media screen and (max-width: 768px) {
-    .smShow {
-      background: #CCC;
-      width: 100%;
-      height: auto;
-      position: absolute;
-      top: 7%;
-      left: 0;
-      display: block;
-    }
-  }
 }
 
 .styleSel {
-  float: right;
   position: absolute;
   right: 10px;
   top: 10px;
 }
 
-.btn-to-top {
-  width: 40px;
-  height: 40px;
-  padding: 10px 10px;
-  border-radius: 50%;
-  color: '#666';
-  font-size: 20px;
-  line-height: 20px;
-  transition: all 0.3s ease-in-out;
+#sidebar {
+  //background-color: IndianRed;
+  width: 320px;
+  height 100%;
+  float: left;
 }
 
-.vue-back-to-top {
-  background-color: '#666' !important;
+#split-bar {
+  background-color: #ccc;
+  height: 100%;
+  width: 6px;
+  cursor: col-resize;
+  float: right;
+  z-index 1000;
+}
+#main {
+  margin-left: 200px;
+  //background-color: BurlyWood;
+  height:100%;
 }
 </style>

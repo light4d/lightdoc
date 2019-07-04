@@ -4,8 +4,6 @@
     <div
       class="aside-container"
       ref="aside"
-      @mousedown="handleWidth"
-      @mouseover="handleover"
       @mouseleave="handleHide"
       :style="{
         cursor:this.$store.state.resize,
@@ -43,7 +41,6 @@ export default {
       resize: "",
       showdiv: false, // 控制鼠标显示样式
       readmeContent: {},
-      fixed: false
     };
   },
   computed: {
@@ -97,7 +94,6 @@ export default {
       // } else {
       e.target.onmousemove = function(e) {
         this.W = e.clientX - clientX;
-        console.log(this.W);
         //self.$store.state.number = dw + this.W;
         e.target.style.width = dw + this.W + "px";
       };
@@ -123,14 +119,14 @@ export default {
       this.$refs.menu.style.display = "none";
     },
     handleHide() {
-      if (this.fixed === true) {
+      if (this.$store.state.fixed === true) {
         return;
       }
       this.$refs.aside.style.display = "none";
       this.$refs.menu.style.display = "block";
     },
     handleFixed(value) {
-      this.fixed = value;
+      this.$store.state.fixed = value;
     },
     changeName(data) {
       console.log(data);
@@ -174,10 +170,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.pointerd {
-  cursor: w-resize !important;
-}
-
 .aside-container >>> .el-tree-node__content {
   border-left: 1px solid #00a0e9;
   // margin-left:20px
@@ -211,11 +203,8 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  width: 400px;
-  min-width: 220px;
   height: 100%;
-  max-width: 500px;
-  border-right: 5px solid #ccc;
+  border-right: 6px solid #ccc;
 }
 </style>
 <style>
