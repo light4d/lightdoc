@@ -6,7 +6,13 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: resolve => require(['@/views/index.vue'], resolve)
+      component: resolve => require(['@/views/index.vue'], resolve),
+      children: [
+        {
+          path: '/:pageId',
+          name: 'document',
+          component: () => import('@/components/markdown.vue')
+        }]
     }
   ]
 })

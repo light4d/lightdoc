@@ -7,7 +7,8 @@
       @mousedown="handleWidth"
       @mouseover="handleover"
       @mouseleave="handleHide"
-      :style="{width:this.$store.state.number+'px',cursor:this.$store.state.resize,
+      :style="{
+        cursor:this.$store.state.resize,
 					display:'none'}"
     >
       <v-header @fixed="handleFixed"></v-header>
@@ -45,6 +46,12 @@ export default {
       fixed: false
     };
   },
+  computed: {
+    username() {
+      // 我们很快就会看到 `params` 是什么
+      return this.$route.params.username;
+    }
+  },
   components: {
     vSearch,
     vHeader
@@ -73,30 +80,33 @@ export default {
         }
       }
       document.title = data.Path;
+      this.$router.push({ name: "user", params: { pageId: data.Path } });
+      console.log(this.$route);
+
       this.$store.commit("changeValue", data);
     },
     handleWidth(e) {
-      e.preventDefault();
       let self = this;
       let clientX = e.clientX;
       let dw = e.target.offsetWidth;
 
-      if (
-        clientX < e.target.offsetWidth - 20 ||
-        clientX > e.target.offsetWidth + 20
-      ) {
-      } else {
-        document.onmousemove = function(e) {
-          e.preventDefault();
-          this.W = e.clientX - clientX;
-          self.$store.state.number = dw + this.W;
-        };
-        document.onmouseup = function() {
-          //self.$store.state.number = "";
-          //document.onmousedown = null;
-          document.onmousemove = null;
-        };
-      }
+      // if (
+      //   clientX < e.target.offsetWidth - 20 ||
+      //   clientX > e.target.offsetWidth + 20
+      // ) {
+      // } else {
+      e.target.onmousemove = function(e) {
+        this.W = e.clientX - clientX;
+        console.log(this.W);
+        //self.$store.state.number = dw + this.W;
+        e.target.style.width = dw + this.W + "px";
+      };
+      document.onmouseup = function() {
+        //self.$store.state.number = "";
+        //document.onmousedown = null;
+        e.target.onmousemove = null;
+      };
+      //}
     },
     handleover(e) {
       if (
@@ -107,23 +117,6 @@ export default {
       } else {
         this.$store.state.resize = "";
       }
-      let self = this;
-      document.onmousemove = function(e) {
-        // console.log(self.$store.state.number,'122222222222')
-
-        e.preventDefault();
-        if (
-          e.clientX < e.target.offsetWidth - 20 ||
-          e.clientX > e.target.offsetWidth + 20
-        ) {
-          // console.log(self.$store.state.number,'22222222222')
-          self.$store.state.number = "";
-        }
-      };
-      document.onmouseup = function() {
-        document.onmousedown = null;
-        document.onmousemove = null;
-      };
     },
     handleAside() {
       this.$refs.aside.style.display = "block";
@@ -218,9 +211,9 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  min-width: 200px;
+  width: 400px;
+  min-width: 220px;
   height: 100%;
-  // background-color:#ccc
   max-width: 500px;
   border-right: 5px solid #ccc;
 }
