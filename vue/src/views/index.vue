@@ -12,14 +12,16 @@
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
         </el-select>
       </div>
-      <div id="sidebar">
+      <div id="sidebar" :style="{
+        position: 'fixed'
+      }">
         <v-aside></v-aside>
         <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize"></div>
       </div>
       <v-markdown
         id="main"
         :style="{
-        marginLeft: this.$store.state.splitbar ? '209px' : '20px'
+        marginLeft: this.$store.state.splitbar ? '250px' : '20px'
       }"
       ></v-markdown>
     </div>
@@ -30,6 +32,7 @@ import vAside from "../components/aside.vue";
 import vMarkdown from "../components/markdown.vue";
 import smShow from "../components/smShow.vue";
 import $ from "jquery";
+//import BackToTop from "vue-backtotop";
 
 export default {
   data() {
@@ -58,6 +61,7 @@ export default {
     vAside,
     vMarkdown,
     smShow
+    //BackToTop
   },
   methods: {
     getValue(color) {
@@ -75,14 +79,15 @@ export default {
     },
     resize(e) {
       e.preventDefault();
-      var min = 100;
-      var max = 3600;
+      var min = 200;
+      var max = 800;
       var mainmin = 200;
       $(document).mousemove(function(e) {
         e.preventDefault();
         var x = e.pageX - $("#sidebar").offset().left;
         if (x > min && x < max && e.pageX < $(window).width() - mainmin) {
           $("#sidebar").css("width", x);
+          $(".aside-container").css("width", x - 5);
           $("#main").css("margin-left", x);
         }
       });
@@ -104,15 +109,19 @@ export default {
 }
 
 .styleSel {
-  position: absolute;
+  position: fixed;
   right: 10px;
   top: 10px;
 }
 
 #sidebar {
   // background-color: IndianRed;
+  width: 250px;
   height: 100%;
   float: left;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 #split-bar {
@@ -121,6 +130,7 @@ export default {
   width: 6px;
   cursor: col-resize;
   float: right;
+  align-self: flex-end;
   z-index: 1000;
 }
 
@@ -128,5 +138,14 @@ export default {
   margin-left: 20px;
   // background-color: BurlyWood;
   height: 100%;
+}
+
+.btn-to-top {
+  width: 60px;
+  height: 60px;
+  padding: 10px 16px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 22px;
 }
 </style>

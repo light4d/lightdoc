@@ -197,13 +197,11 @@ export default {
   font-weight: 800;
 }
 
-// .aside-container >>>  .el-tree-node__content:hover
-// background:rgba(0,160,233,.1)
-// color:#00a0e9
-// font-weight :800
 .aside-container {
   display: flex;
   flex-direction: column;
+  width: 250px;
+  min-width: 200px;
   overflow: auto;
   height: 100%;
   // border-right: 6px solid #ccc;
@@ -214,10 +212,6 @@ export default {
   min-width: 200px;
   height: 100%;
   position: relative;
-}
-
-.tree {
-  margin-right: 15px;
 }
 
 .menu-con {
