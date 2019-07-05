@@ -77,8 +77,9 @@ export default {
         }
       }
       document.title = data.Path;
-      this.$router.push({ name: "content", params: { pageId: data.Path } });
-      console.log(this.$route);
+      var name = data.Path.substring(data.Path.indexOf("/") + 1);
+      this.$router.push({ name: "content", params: { pageId: name } });
+      console.log(this.$router);
 
       this.$store.commit("changeValue", data);
     },

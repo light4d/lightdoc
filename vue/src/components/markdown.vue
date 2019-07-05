@@ -59,7 +59,7 @@ export default {
   },
   watch: {
     info() {
-      this.Path = this.$route.params.pageId;
+      this.Path.type = this.$route.params.pageId;
     }
   },
   methods: {
