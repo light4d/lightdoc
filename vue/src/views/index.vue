@@ -1,30 +1,28 @@
 <template>
   <div class="z-container">
-    <div class="content">
-      <div class="styleSel">
-        <el-select
-          v-model="value"
-          size="mini"
-          placeholder="样式选择"
-          style="width: 100px"
-          @change="getValue"
-        >
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
-        </el-select>
-      </div>
-      <div id="sidebar" :style="{
+    <div class="styleSel">
+      <el-select
+        v-model="value"
+        size="mini"
+        placeholder="样式选择"
+        style="width: 100px"
+        @change="getValue"
+      >
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
+      </el-select>
+    </div>
+    <div id="sidebar" :style="{
         position: 'fixed'
       }">
-        <v-aside></v-aside>
-        <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize"></div>
-      </div>
-      <v-markdown
-        id="main"
-        :style="{
+      <v-aside></v-aside>
+      <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize"></div>
+    </div>
+    <v-markdown
+      id="main"
+      :style="{
         marginLeft: this.$store.state.splitbar ? '250px' : '20px'
       }"
-      ></v-markdown>
-    </div>
+    ></v-markdown>
   </div>
 </template>
 <script>

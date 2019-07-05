@@ -186,7 +186,7 @@ export default {
 
 .aside-container >>> .el-tree-node__expand-icon {
   position: absolute;
-  left: 75%;
+  left: 88%;
 }
 
 // .container >>> .el-tree-node:focus > .el-tree-node__content
@@ -202,18 +202,12 @@ export default {
   flex-direction: column;
   width: 250px;
   min-width: 200px;
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
   // border-right: 6px solid #ccc;
 }
 </style>
 <style>
-.content {
-  min-width: 200px;
-  height: 100%;
-  position: relative;
-}
-
 .menu-con {
   background-color: rgb(242, 245, 247);
   box-shadow: rgba(118, 118, 118, 0.11) 2px 0px 5px 0px;

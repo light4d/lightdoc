@@ -6,11 +6,6 @@
       </button>
     </back-to-top>
     <div v-html="this.$store.state.readmeContent"></div>
-    <h1>lalalala</h1>
-    <h1>lalalala</h1>
-    <h1>lalalala</h1>
-    <h1>lalalala</h1>
-    <h1>lalalala</h1>
   </div>
 </template>
 
