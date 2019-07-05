@@ -14,9 +14,14 @@
       </div>
       <div id="sidebar">
         <v-aside></v-aside>
-        <div id="split-bar" v-if="this.$store.state.fixed"  @mousedown="resize"></div>
+        <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize"></div>
       </div>
-      <v-markdown id="main"></v-markdown>
+      <v-markdown
+        id="main"
+        :style="{
+        marginLeft: this.$store.state.splitbar ? '209px' : '20px'
+      }"
+      ></v-markdown>
     </div>
   </div>
 </template>
@@ -70,7 +75,7 @@ export default {
     },
     resize(e) {
       e.preventDefault();
-      var min = 300;
+      var min = 100;
       var max = 3600;
       var mainmin = 200;
       $(document).mousemove(function(e) {
@@ -105,9 +110,8 @@ export default {
 }
 
 #sidebar {
-  //background-color: IndianRed;
-  width: 320px;
-  height 100%;
+  // background-color: IndianRed;
+  height: 100%;
   float: left;
 }
 
@@ -117,11 +121,12 @@ export default {
   width: 6px;
   cursor: col-resize;
   float: right;
-  z-index 1000;
+  z-index: 1000;
 }
+
 #main {
-  margin-left: 200px;
-  //background-color: BurlyWood;
-  height:100%;
+  margin-left: 20px;
+  // background-color: BurlyWood;
+  height: 100%;
 }
 </style>

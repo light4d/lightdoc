@@ -10,6 +10,7 @@ const state = {
   readmeContent: '',
   number: '',
   resize: '',
+  splitbar: false,
   fixed: false
 }
 const mutations = {

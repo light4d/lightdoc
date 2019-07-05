@@ -6,8 +6,7 @@
       ref="aside"
       @mouseleave="handleHide"
       :style="{
-        cursor:this.$store.state.resize,
-					display:'none'}"
+					display:'none',}"
     >
       <v-header @fixed="handleFixed"></v-header>
       <v-search></v-search>
@@ -41,6 +40,7 @@ export default {
       resize: "",
       showdiv: false, // 控制鼠标显示样式
       readmeContent: {},
+      fixed: false
     };
   },
   computed: {
@@ -117,6 +117,7 @@ export default {
     handleAside() {
       this.$refs.aside.style.display = "block";
       this.$refs.menu.style.display = "none";
+      this.$store.state.splitbar = true;
     },
     handleHide() {
       if (this.$store.state.fixed === true) {
@@ -124,6 +125,7 @@ export default {
       }
       this.$refs.aside.style.display = "none";
       this.$refs.menu.style.display = "block";
+      this.$store.state.splitbar = false;
     },
     handleFixed(value) {
       this.$store.state.fixed = value;
@@ -204,7 +206,7 @@ export default {
   flex-direction: column;
   overflow: auto;
   height: 100%;
-  border-right: 6px solid #ccc;
+  // border-right: 6px solid #ccc;
 }
 </style>
 <style>

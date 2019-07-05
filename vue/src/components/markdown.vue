@@ -1,6 +1,11 @@
 <template>
   <div class="m-container">
     <div v-html="this.$store.state.readmeContent"></div>
+    <h1>lalalala</h1>
+    <h1>lalalala</h1>
+    <h1>lalalala</h1>
+    <h1>lalalala</h1>
+    <h1>lalalala</h1>
   </div>
 </template>
 
@@ -66,6 +71,6 @@ export default {
 // @import '../../static/monokai-sublime.css';
 .m-container {
   padding: 0 30px 0 30px;
-  width: 100%;
+  width: auto;
 }
 </style>
