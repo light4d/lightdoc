@@ -20,15 +20,16 @@ func SerchKeyWords(key string) Allsearchresult {
 	fileindex := SerchTextfile(config.Root)
 	allresult := Allsearchresult{}
 	for i, v := range fileindex {
-		if IsName(key, v) {
-			newpath := i[len(config.Root):]
-			webpage := Searchresult{newpath, "", true}
-			allresult = append(allresult, webpage)
-		}
 		if Isinthere(key, i) {
 			newpath := i[len(config.Root):]
 			keywords := SearchText(key, i)
 			webpage := Searchresult{newpath, keywords, false}
+			allresult = append(allresult, webpage)
+			continue
+		}
+		if IsName(key, v) {
+			newpath := i[len(config.Root):]
+			webpage := Searchresult{newpath, "", true}
 			allresult = append(allresult, webpage)
 		}
 	}
@@ -98,6 +99,9 @@ func SearchText(key string, path string) string {
 	end, nk := []rune(a), []rune(key)
 
 	index := SearchIndex(end, nk)
+	if index == -1 {
+		return "Not Found"
+	}
 	indexstart := 0
 	indexend := len(a) - 1
 	if index-30 >= 0 {
@@ -110,9 +114,16 @@ func SearchText(key string, path string) string {
 	return string(end[indexstart:indexend])
 }
 
-func SearchIndex(b, k []rune) int {
-	for i := 0; i < len(b)-len(k)-1; i++ {
-		if string(b[i:i+len(k)-1]) == string(k) {
+func SearchIndex(body, key []rune) int {
+	for i := range body {
+		found := true
+		for j := range key {
+			if body[i+j] != key[j] {
+				found = false
+				break
+			}
+		}
+		if found {
 			return i
 		}
 	}
