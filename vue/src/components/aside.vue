@@ -26,6 +26,7 @@
 <script>
 import vSearch from "./search.vue";
 import vHeader from "./header.vue";
+import marked from "marked";
 
 export default {
   data() {
@@ -53,6 +54,21 @@ export default {
     vSearch,
     vHeader
   },
+  watch: {
+    $route(to, from) {
+      this.axios({
+        method: "GET",
+        url: to.path,
+        data: null
+      })
+        .then(res => {
+          this.$store.state.readmeContent = marked(res.data);
+        })
+        .catch(err => {
+          console.log(111);
+        });
+    }
+  },
   mounted() {
     this.axios({
       method: "TREE",
@@ -79,7 +95,6 @@ export default {
       document.title = data.Path;
       var name = data.Path.substring(data.Path.indexOf("/") + 1);
       this.$router.push({ name: "content", params: { pageId: name } });
-      console.log(this.$router);
 
       this.$store.commit("changeValue", data);
     },

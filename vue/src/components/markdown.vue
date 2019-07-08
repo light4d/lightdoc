@@ -31,8 +31,8 @@ export default {
   },
   created() {
     this.axios({
-      method: "FILE",
-      url: this.$route.params.pageId,
+      method: "GET",
+      url: "/" + this.$route.params.pageId,
       data: null
     })
       .then(res => {
