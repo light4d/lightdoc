@@ -28,6 +28,7 @@ export default {
   },
   watch: {
     $route(to, from) {
+      console.log(to);
       this.isLoading = true;
       this.axios({
         method: "GET",
@@ -42,6 +43,7 @@ export default {
           console.log(111);
           this.apiFailure = true;
         });
+      this.timer = setTimeout(this.apiFailed, 3000);
     }
   },
   created() {
@@ -81,6 +83,7 @@ export default {
     },
     apiFailed() {
       this.isLoading = false;
+      this.apiFailure = false;
     }
   }
 };
