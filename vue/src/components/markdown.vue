@@ -1,10 +1,5 @@
 <template>
   <div class="m-container">
-    <back-to-top bottom="50px" right="50px">
-      <button type="button" class="btn btn-info btn-to-top">
-        <i class="el-icon-caret-top"></i>
-      </button>
-    </back-to-top>
     <div v-html="this.$store.state.readmeContent"></div>
   </div>
 </template>
@@ -12,22 +7,29 @@
 <script>
 import marked from "marked";
 import hljs from "highlight.js";
-import BackToTop from "vue-backtotop";
 
 export default {
   name: "vMarkdown",
-  props: {
-    Path: {
-      type: Array
-    }
-  },
   data() {
     return {
-      defaultData: "preview"
+      defaultData: "preview",
+      isLoading: false
     };
   },
-  components: {
-    BackToTop
+  watch: {
+    $route(to, from) {
+      this.axios({
+        method: "GET",
+        url: to.path,
+        data: null
+      })
+        .then(res => {
+          this.$store.state.readmeContent = marked(res.data);
+        })
+        .catch(err => {
+          console.log(111);
+        });
+    }
   },
   created() {
     this.axios({
@@ -56,11 +58,6 @@ export default {
       smartypants: false,
       xhtml: false
     });
-  },
-  watch: {
-    info() {
-      this.Path.type = this.$route.params.pageId;
-    }
   },
   methods: {
     changeData(value, render) {

@@ -26,7 +26,6 @@
 <script>
 import vSearch from "./search.vue";
 import vHeader from "./header.vue";
-import marked from "marked";
 
 export default {
   data() {
@@ -53,21 +52,6 @@ export default {
   components: {
     vSearch,
     vHeader
-  },
-  watch: {
-    $route(to, from) {
-      this.axios({
-        method: "GET",
-        url: to.path,
-        data: null
-      })
-        .then(res => {
-          this.$store.state.readmeContent = marked(res.data);
-        })
-        .catch(err => {
-          console.log(111);
-        });
-    }
   },
   mounted() {
     this.axios({

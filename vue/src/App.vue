@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { Backtop } from "element-ui";
 export default {
   name: "App"
 };
