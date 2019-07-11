@@ -115,6 +115,7 @@ export default {
       this.$refs.aside.style.display = "block";
       this.$refs.menu.style.display = "none";
       this.$store.state.splitbar = true;
+      debugger
       this.$emit("handleMobile",true);
     },
     handleHide() {

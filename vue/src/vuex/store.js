@@ -12,6 +12,7 @@ const state = {
   resize: '',
   splitbar: false,
   fixed: false,
+  sidebarMarginLeft: 'init'
 }
 const mutations = {
   changeValue(state, newValue) {

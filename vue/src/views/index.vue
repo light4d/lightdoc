@@ -22,7 +22,7 @@
     <v-markdown
       id="main"
       :style="{
-        marginLeft: this.$store.state.splitbar ? '250px' : '20px'
+        marginLeft: this.$store.state.splitbar ? this.$store.state.sidebarMarginLeft === 'init' ? '250px' : this.$store.state.sidebarMarginLeft+'px': '20px'
       }"
       :mobileV="mobileV"
       @handleMobile="handleMobile"
@@ -98,6 +98,7 @@ export default {
       var min = 200;
       var max = 800;
       var mainmin = 200;
+      var that = this;
       $(document).mousemove(function(e) {
         e.preventDefault();
         var x = e.pageX - $("#sidebar").offset().left;
@@ -105,6 +106,8 @@ export default {
           $("#sidebar").css("width", x);
           $(".aside-container").css("width", x - 5);
           $("#main").css("margin-left", x);
+          that.$store.state.sidebarMarginLeft = x;
+          console.log(that.$store.state.sidebarMarginLeft);
         }
       });
     }
@@ -164,6 +167,7 @@ export default {
     width: 80%;
     overflow: auto;
     height: 100%;
+    transition: opacity 1s ease;
   }
 
   #split-bar {
