@@ -48,10 +48,9 @@ export default {
     mobileV: Boolean
   },
   computed: {
-    OppositeMobileV(){
+    OppositeMobileV() {
       return !this.mobileV;
     }
-
   },
   components: {
     vSearch,
@@ -75,7 +74,7 @@ export default {
     handleNodeClick(data) {
       console.log(data);
 
-      if (this.$store.state.fixed === false) this.$emit("handleMobile",false);
+      if (this.$store.state.fixed === false) this.$emit("handleMobile", false);
 
       if (data.Nodes.length > 0) {
         for (var i = 0; i < data.Nodes.length; i++) {
@@ -115,8 +114,8 @@ export default {
       this.$refs.aside.style.display = "block";
       this.$refs.menu.style.display = "none";
       this.$store.state.splitbar = true;
-      debugger
-      this.$emit("handleMobile",true);
+      debugger;
+      this.$emit("handleMobile", true);
     },
     handleHide() {
       if (this.$store.state.fixed === true) {
@@ -125,7 +124,7 @@ export default {
       this.$refs.aside.style.display = "none";
       this.$refs.menu.style.display = "block";
       this.$store.state.splitbar = false;
-      this.$emit("handleMobile",false);
+      this.$emit("handleMobile", false);
     },
     handleFixed(value) {
       this.$store.state.fixed = value;

@@ -16,7 +16,7 @@
       }">
       <v-aside :mobileV="mobileV" @handleMobile="handleMobile"></v-aside>
       <transition name="el-zoom-in-center">
-        <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize" v-show="mobileV"></div>
+        <div id="split-bar" @mousedown="resize" v-show="mobileV"></div>
       </transition>
     </div>
     <v-markdown
