@@ -72,6 +72,11 @@ export default {
         this.mobileV = !this.mobileV;
       }
       console.log("mobileV: " + this.mobileV);
+      if (this.mobileV === true)
+        document.querySelector("#sidebar").style.backgroundColor = "white";
+      else
+        document.querySelector("#sidebar").style.backgroundColor =
+          "transparent";
     },
     getValue(color) {
       var elements = [];
