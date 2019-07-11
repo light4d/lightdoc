@@ -14,14 +14,16 @@
     <div id="sidebar" :style="{
         position: 'fixed'
       }">
-      <v-aside></v-aside>
-      <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize"></div>
+      <v-aside :mobileV="mobileV" @handleMobile="handleMobile"></v-aside>
+      <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize" v-show="mobileV"></div>
     </div>
     <v-markdown
       id="main"
       :style="{
         marginLeft: this.$store.state.splitbar ? '250px' : '20px'
       }"
+      :mobileV="mobileV"
+      @handleMobile="handleMobile"
     ></v-markdown>
   </div>
 </template>
@@ -30,7 +32,6 @@ import vAside from "../components/aside.vue";
 import vMarkdown from "../components/markdown.vue";
 import smShow from "../components/smShow.vue";
 import $ from "jquery";
-//import BackToTop from "vue-backtotop";
 
 export default {
   data() {
@@ -52,7 +53,8 @@ export default {
           rgb: "#303133"
         }
       ],
-      value: ""
+      value: "",
+      mobileV: false
     };
   },
   components: {
@@ -62,6 +64,15 @@ export default {
     //BackToTop
   },
   methods: {
+    handleMobile(value) {
+      if (value !== undefined) {
+        console.log("value: " + value);
+        this.mobileV = value;
+      } else {
+        this.mobileV = !this.mobileV;
+      }
+      console.log("mobileV: " + this.mobileV);
+    },
     getValue(color) {
       var elements = [];
       elements[0] = document.querySelectorAll("h1");
@@ -138,12 +149,17 @@ export default {
   height: 100%;
 }
 
-.btn-to-top {
-  width: 60px;
-  height: 60px;
-  padding: 10px 16px;
-  border-radius: 50%;
-  font-size: 22px;
-  line-height: 22px;
+@media screen and (max-width: 768px) {
+  #sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    overflow: auto;
+    height: 100%;
+  }
+
+  #split-bar {
+    position: absolute;
+  }
 }
 </style>

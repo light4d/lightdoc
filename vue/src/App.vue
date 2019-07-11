@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  mounted() {
+    document.title = "Hello Lightdoc";
+  }
 };
 </script>
 

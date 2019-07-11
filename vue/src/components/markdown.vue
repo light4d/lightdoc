@@ -1,5 +1,5 @@
 <template>
-  <div class="m-container">
+  <div class="m-container" @click="handleMobile">
     <el-table
       class="load"
       v-loading="isLoading"
@@ -9,7 +9,6 @@
       style="width: 100%"
     ></el-table>
     <div id="content" v-html="this.$store.state.readmeContent"></div>
-    <el-alert class="alertMsg" center title="请求错误！请刷新重试" type="error" v-show="apiFailure"></el-alert>
   </div>
 </template>
 
@@ -22,9 +21,11 @@ export default {
   data() {
     return {
       isLoading: false,
-      timer: "",
-      apiFailure: false
+      timer: ""
     };
+  },
+  props: {
+    mobileV: Boolean
   },
   watch: {
     $route(to, from) {
@@ -41,7 +42,6 @@ export default {
         })
         .catch(err => {
           console.log(111);
-          this.apiFailure = true;
         });
       this.timer = setTimeout(this.apiFailed, 3000);
     }
@@ -78,12 +78,14 @@ export default {
     // });
   },
   methods: {
+    handleMobile() {
+      this.$emit("handleMobile", false);
+    },
     changeData(value, render) {
       console.log(render);
     },
     apiFailed() {
       this.isLoading = false;
-      this.apiFailure = false;
     }
   }
 };
@@ -107,5 +109,11 @@ export default {
 
 #content {
   width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .m-container {
+    margin-left: 10px !important;
+  }
 }
 </style>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="menu-con" ref="menu" @mouseover="handleAside">菜单</div>
+    <div class="menu-con" ref="menu" @mouseover="handleAside" v-show="OppositeMobileV">菜单</div>
     <div
       class="aside-container"
       ref="aside"
       @mouseleave="handleHide"
+      v-show="mobileV"
       :style="{
 					display:'none',}"
     >
@@ -43,11 +44,14 @@ export default {
       fixed: false
     };
   },
+  props: {
+    mobileV: Boolean
+  },
   computed: {
-    username() {
-      // 我们很快就会看到 `params` 是什么
-      return this.$route.params.username;
+    OppositeMobileV(){
+      return !this.mobileV;
     }
+
   },
   components: {
     vSearch,
@@ -70,6 +74,9 @@ export default {
   methods: {
     handleNodeClick(data) {
       console.log(data);
+
+      if (this.$store.state.fixed === false) this.$emit("handleMobile",false);
+
       if (data.Nodes.length > 0) {
         for (var i = 0; i < data.Nodes.length; i++) {
           var reg = /[^<>/\\\|:""\*\?]+\.\w+$/;
@@ -104,20 +111,11 @@ export default {
       };
       //}
     },
-    handleover(e) {
-      if (
-        e.clientX > e.target.offsetWidth - 20 &&
-        e.clientX < e.target.offsetWidth + 20
-      ) {
-        this.$store.state.resize = "w-resize";
-      } else {
-        this.$store.state.resize = "";
-      }
-    },
     handleAside() {
       this.$refs.aside.style.display = "block";
       this.$refs.menu.style.display = "none";
       this.$store.state.splitbar = true;
+      this.$emit("handleMobile",true);
     },
     handleHide() {
       if (this.$store.state.fixed === true) {
@@ -205,6 +203,17 @@ export default {
   overflow: hidden;
   height: 100%;
   // border-right: 6px solid #ccc;
+}
+
+@media screen and (max-width: 768px) {
+  .aside-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    height: 100%;
+  }
 }
 </style>
 <style>
