@@ -15,7 +15,9 @@
         position: 'fixed'
       }">
       <v-aside :mobileV="mobileV" @handleMobile="handleMobile"></v-aside>
-      <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize" v-show="mobileV"></div>
+      <transition name="el-zoom-in-center">
+        <div id="split-bar" v-if="this.$store.state.splitbar" @mousedown="resize" v-show="mobileV"></div>
+      </transition>
     </div>
     <v-markdown
       id="main"
@@ -136,6 +138,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  transition: all 0.5s ease;
 }
 
 #split-bar {

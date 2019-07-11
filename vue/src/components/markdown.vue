@@ -95,8 +95,9 @@ export default {
 // @import '../../static/monokai-sublime.css';
 .m-container {
   display: flex;
-  padding: 0 10px;
+  padding: 0 20px;
   width: auto;
+  transition: all 0.5s ease;
 }
 
 .alertMsg {

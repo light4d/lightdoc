@@ -124,6 +124,7 @@ export default {
       this.$refs.aside.style.display = "none";
       this.$refs.menu.style.display = "block";
       this.$store.state.splitbar = false;
+      this.$emit("handleMobile",false);
     },
     handleFixed(value) {
       this.$store.state.fixed = value;
