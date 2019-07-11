@@ -97,7 +97,7 @@ export default {
   display: flex;
   padding: 0 20px;
   width: auto;
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 
 .alertMsg {
@@ -115,6 +115,7 @@ export default {
 @media screen and (max-width: 768px) {
   .m-container {
     margin-left: 10px !important;
+    transition: all 0.2s ease;
   }
 }
 </style>

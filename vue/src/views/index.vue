@@ -141,7 +141,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 
 #split-bar {
@@ -167,7 +167,7 @@ export default {
     width: 80%;
     overflow: auto;
     height: 100%;
-    transition: opacity 1s ease;
+    transition: opacity 0.3s ease;
   }
 
   #split-bar {
