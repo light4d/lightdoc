@@ -173,7 +173,6 @@ export default {
 <style lang="stylus" scoped>
 .aside-container >>> .el-tree-node__content {
   border-left: 1px solid #00a0e9;
-  // margin-left:20px
   padding-left: 10px !important;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -188,8 +187,6 @@ export default {
   left: 88%;
 }
 
-// .container >>> .el-tree-node:focus > .el-tree-node__content
-// background:#c7ceb2
 .aside-container >>> .el-tree-node:focus > .el-tree-node__content {
   border-left: 3px solid #00a0e9;
   color: #00a0e9;
@@ -203,7 +200,6 @@ export default {
   min-width: 200px;
   overflow: hidden;
   height: 100%;
-  // border-right: 6px solid #ccc;
 }
 
 @media screen and (max-width: 768px) {

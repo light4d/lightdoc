@@ -134,7 +134,6 @@ export default {
 }
 
 #sidebar {
-  // background-color: IndianRed;
   width: 250px;
   height: 100%;
   float: left;
@@ -156,7 +155,6 @@ export default {
 
 #main {
   margin-left: 20px;
-  // background-color: BurlyWood;
   height: 100%;
 }
 
