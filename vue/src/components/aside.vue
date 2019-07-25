@@ -184,7 +184,7 @@ export default {
 
 .aside-container >>> .el-tree-node__expand-icon {
   position: absolute;
-  left: 88%;
+  right: 20px;
 }
 
 .aside-container >>> .el-tree-node:focus > .el-tree-node__content {
@@ -200,6 +200,7 @@ export default {
   min-width: 200px;
   overflow: hidden;
   height: 100%;
+  position: fixed;
 }
 
 @media screen and (max-width: 768px) {
@@ -210,10 +211,15 @@ export default {
     max-width: 600px;
     overflow: hidden;
     height: 100%;
+    position: fixed;
   }
 }
 </style>
 <style>
+.tree {
+  overflow-y: scroll;
+  margin-right: -10px;
+}
 .menu-con {
   background-color: rgb(242, 245, 247);
   box-shadow: rgba(118, 118, 118, 0.11) 2px 0px 5px 0px;
