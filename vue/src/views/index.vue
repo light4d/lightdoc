@@ -68,12 +68,10 @@ export default {
   methods: {
     handleMobile(value) {
       if (value !== undefined) {
-        console.log("value: " + value);
         this.mobileV = value;
       } else {
         this.mobileV = !this.mobileV;
       }
-      console.log("mobileV: " + this.mobileV);
       if (this.mobileV === true)
         document.querySelector("#sidebar").style.backgroundColor = "white";
       else
@@ -86,7 +84,6 @@ export default {
       elements[1] = document.querySelectorAll("h2");
       elements[2] = document.querySelectorAll("h3");
       elements[3] = document.querySelectorAll("h4");
-      console.log(elements);
       for (var i = 0; i < elements.length; i++) {
         for (var n = 0; n < elements[i].length; n++) {
           elements[i][n].style.color = color.rgb;
