@@ -68,25 +68,31 @@ export default {
       .catch(err => {
         console.log("没有文件");
       });
-    console.log(this.data);
   },
   methods: {
     handleNodeClick(data) {
       console.log(data);
+      if (data.className !== "folder") {
+        if (this.$store.state.fixed === false)
+          this.$emit("handleMobile", false);
 
-      if (this.$store.state.fixed === false) this.$emit("handleMobile", false);
-
-      if (data.Nodes.length > 0) {
-        for (var i = 0; i < data.Nodes.length; i++) {
-          var reg = /[^<>/\\\|:""\*\?]+\.\w+$/;
-          data.Nodes[i].Name = data.Nodes[i].Path.match(reg)[0];
+        if (data.Nodes.length > 0) {
+          for (var i = 0; i < data.Nodes.length; i++) {
+            var reg = /[^<>/\\\|:""\*\?]+\.\w+$/;
+            data.Nodes[i].Name = data.Nodes[i].Path.match(reg)[0];
+          }
         }
-      }
-      document.title = data.Path;
-      var name = data.Path.substring(data.Path.indexOf("/") + 1);
-      this.$router.push({ name: "content", params: { pageId: name } });
 
-      this.$store.commit("changeValue", data);
+        var name = data.Path.substring(data.Path.indexOf("/") + 1);
+
+        if (data.className === "pdficon") {
+          window.open(window.location.href + name, data.Path);
+        }
+        document.title = data.Path;
+        this.$router.push({ name: "content", params: { pageId: name } });
+
+        this.$store.commit("changeValue", data);
+      }
     },
     handleWidth(e) {
       let self = this;
@@ -114,7 +120,6 @@ export default {
       this.$refs.aside.style.display = "block";
       this.$refs.menu.style.display = "none";
       this.$store.state.splitbar = true;
-      debugger;
       this.$emit("handleMobile", true);
     },
     handleHide() {
