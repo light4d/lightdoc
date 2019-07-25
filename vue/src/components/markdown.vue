@@ -79,7 +79,8 @@ export default {
   },
   methods: {
     handleMobile() {
-      this.$emit("handleMobile", false);
+      if (this.$store.state.fixed === "false")
+        this.$emit("handleMobile", false);
     },
     changeData(value, render) {
       console.log(render);

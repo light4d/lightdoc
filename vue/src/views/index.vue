@@ -67,6 +67,9 @@ export default {
   },
   methods: {
     handleMobile(value) {
+      console.log("Index中的value：" + value);
+      console.log("fixed的值：" + this.$store.state.fixed);
+
       if (value !== undefined) {
         this.mobileV = value;
       } else {

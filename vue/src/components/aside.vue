@@ -133,6 +133,7 @@ export default {
     },
     handleFixed(value) {
       this.$store.state.fixed = value;
+      console.log(this.$store.state.fixed);
     },
     changeName(data) {
       console.log(data);
