@@ -87,11 +87,12 @@ export default {
 
         if (data.className === "pdficon") {
           window.open(window.location.href + name, data.Path);
-        }
-        document.title = data.Path;
-        this.$router.push({ name: "content", params: { pageId: name } });
+        } else {
+          document.title = data.Path;
+          this.$router.push({ name: "content", params: { pageId: name } });
 
-        this.$store.commit("changeValue", data);
+          this.$store.commit("changeValue", data);
+        }
       }
     },
     handleWidth(e) {
