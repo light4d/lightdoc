@@ -3,6 +3,7 @@ package model
 import (
 	"io/ioutil"
 	"lightdoc/config"
+	"lightdoc/status"
 	"path"
 	"strings"
 )
@@ -29,26 +30,15 @@ func (tree *Node) Filelist(p string) {
 	for _, f := range files {
 		if !f.IsDir() {
 			sname := path.Ext(f.Name())
-			switch sname {
-			case ".md":
-			case ".pdf":
-				{
-				}
-			default:
+			if !status.Exist(sname, status.Fileext) {
 				continue
 			}
 		} else {
 			sname := path.Ext(f.Name())
-			switch sname {
-			case ".git":
-			case ".vscode":
-			case ".idea":
-				{
-					continue
-				}
-			default:
-
+			if status.Exist(sname, status.Folders) {
+				continue
 			}
+
 		}
 		childdir := p + "/" + f.Name()
 		childnode := new(Node)
