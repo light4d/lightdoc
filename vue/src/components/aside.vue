@@ -98,7 +98,6 @@ export default {
           this.$router.push({ name: "content", params: { pageId: name } });
         }
       }
-      this.$store.commit("changeValue", data);
     },
     handleWidth(e) {
       let self = this;

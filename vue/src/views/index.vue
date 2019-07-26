@@ -162,7 +162,7 @@ export default {
   #sidebar {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 70%;
     overflow: auto;
     height: 100%;
     transition: opacity 0.3s ease;
