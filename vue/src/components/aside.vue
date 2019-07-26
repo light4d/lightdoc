@@ -93,12 +93,12 @@ export default {
 
         if (data.className === "pdficon") {
           window.open(window.location.origin + "/" + name, data.Path);
-          //this.$store.commit("changeValue", data);
         } else {
           document.title = data.Path;
           this.$router.push({ name: "content", params: { pageId: name } });
         }
       }
+      this.$store.commit("changeValue", data);
     },
     handleWidth(e) {
       let self = this;

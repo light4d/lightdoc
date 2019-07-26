@@ -3,7 +3,7 @@
     <div class="logo">
       <img v-if="url" :url="{urllogo}" />
     </div>
-    <div class="fixed" @click.stop="handlefixed">
+    <div class="fixed" @click="handlefixed">
       <img src="@/assets/iconfont/guding.svg" alt :class="{'animated':fixed==true}" />
     </div>
   </div>
