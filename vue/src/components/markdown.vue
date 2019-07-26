@@ -117,6 +117,7 @@ export default {
     margin-left: 10px !important;
     transition: all 0.2s ease;
     padding: 0 10px;
+    width: auto;
   }
 }
 </style>
