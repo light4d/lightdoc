@@ -1,6 +1,12 @@
 <template>
   <div>
-    <div class="menu-con" ref="menu" @mouseover="handleAside" v-show="OppositeMobileV">菜单</div>
+    <div
+      class="menu-con"
+      ref="menu"
+      @mouseover="handleAside"
+      @click.stop="handleAside"
+      v-show="OppositeMobileV"
+    >菜单</div>
     <div
       class="aside-container"
       ref="aside"
@@ -209,13 +215,13 @@ export default {
   position: fixed;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 450px) {
   .aside-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 600px;
-    overflow: hidden;
+    max-width: 300px;
+    overflow: auto;
     height: 100%;
     position: fixed;
   }

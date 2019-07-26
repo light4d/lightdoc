@@ -1,5 +1,5 @@
 <template>
-  <div class="m-container" @click="handleMobile">
+  <div class="m-container" @click.stop="handleMobile">
     <el-table
       class="load"
       v-loading="isLoading"
@@ -117,6 +117,7 @@ export default {
   .m-container {
     margin-left: 10px !important;
     transition: all 0.2s ease;
+    padding: 0 10px;
   }
 }
 </style>
