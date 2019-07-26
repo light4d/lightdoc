@@ -163,7 +163,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 70%;
-    overflow: auto;
+    overflow: hidden;
     height: 100%;
     transition: opacity 0.3s ease;
   }
