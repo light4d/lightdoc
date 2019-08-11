@@ -6,7 +6,6 @@
       clearable
       prefix-icon="el-icon-search"
       v-model="searchContent"
-      debounce
       @input="changeContent"
     ></el-input>
   </div>
@@ -23,8 +22,9 @@ export default {
   methods: {
     changeContent(e) {
       //console.log("Search component: " + this.searchContent);
-
-      this.$emit("changeContent", this.searchContent);
+      setTimeout(() => {
+        this.$emit("changeContent", this.searchContent);
+      }, 400);
     }
   },
   mounted() {}

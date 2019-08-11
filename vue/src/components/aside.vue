@@ -19,7 +19,7 @@
       <v-search @changeContent="handleSearch"></v-search>
       <div class="tree">
         <el-tree
-          :data="data"
+          :data="treeNodes"
           :props="defaultProps"
           @node-click="handleNodeClick"
           id="el-tree"
@@ -38,6 +38,7 @@ export default {
   data() {
     return {
       data: [],
+      treeNodes: [],
       defaultProps: {
         children: "Nodes",
         label: "Name",
@@ -69,7 +70,8 @@ export default {
       data: null
     })
       .then(res => {
-        this.data = this.changeName(res.data.Nodes);
+        this.data = res.data.Nodes;
+        this.treeNodes = this.changeName(this.data);
       })
       .catch(err => {
         console.log("没有文件");
@@ -78,9 +80,29 @@ export default {
   methods: {
     handleSearch(text) {
       console.log(text);
+      var filterContent = [];
+      if (text === "") {
+        this.treeNodes = this.data;
+      } else {
+        this.treeNodes = [];
+        this.filterTree(text, this.data);
+      }
+    },
+    filterTree(text, data) {
+      if (data.length === 0) return;
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].Name.indexOf(text) !== -1) {
+          console.log(data[i].Name.indexOf(text));
+          this.treeNodes.push(data[i]);
+        } else this.filterTree(text, data[i]);
+      }
+      return;
     },
     // el-tree自带方法，当节点被点击触发
     handleNodeClick(data) {
+      console.log(this.data);
+
+      console.log(this.treeNodes);
       console.log(data);
       if (data.className !== "folder") {
         if (this.$store.state.fixed === false)
