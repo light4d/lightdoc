@@ -145,7 +145,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 #split-bar {
