@@ -91,10 +91,10 @@ export default {
     filterTree(text, data) {
       if (data.length === 0) return;
       for (var i = 0; i < data.length; i++) {
-        if (data[i].Name.indexOf(text) !== -1) {
-          console.log(data[i].Name.indexOf(text));
+        if (data[i].Name.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
+          console.log(data[i].Name.toLowerCase().indexOf(text.toLowerCase));
           this.treeNodes.push(data[i]);
-        } else this.filterTree(text, data[i]);
+        } else this.filterTree(text, data[i].Nodes);
       }
       return;
     },
