@@ -16,7 +16,7 @@
 					display:'none',}"
     >
       <v-header @fixed="handleFixed"></v-header>
-      <v-search></v-search>
+      <v-search @changeContent="handleSearch"></v-search>
       <div class="tree">
         <el-tree
           :data="data"
@@ -76,6 +76,10 @@ export default {
       });
   },
   methods: {
+    handleSearch(text) {
+      console.log(text);
+    },
+    // el-tree自带方法，当节点被点击触发
     handleNodeClick(data) {
       console.log(data);
       if (data.className !== "folder") {
@@ -104,19 +108,13 @@ export default {
       let clientX = e.clientX;
       let dw = e.target.offsetWidth;
 
-      // if (
-      //   clientX < e.target.offsetWidth - 20 ||
-      //   clientX > e.target.offsetWidth + 20
-      // ) {
-      // } else {
       e.target.onmousemove = function(e) {
         this.W = e.clientX - clientX;
         //self.$store.state.number = dw + this.W;
         e.target.style.width = dw + this.W + "px";
       };
+      //如果写成e.target.onmouseup，鼠标一旦超出侧边栏区域就无法滑动控制宽度，因此要在整个document加上onmouseup
       document.onmouseup = function() {
-        //self.$store.state.number = "";
-        //document.onmousedown = null;
         e.target.onmousemove = null;
       };
       //}
