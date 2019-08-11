@@ -1,5 +1,6 @@
 <template>
   <div class="z-container">
+    <!-- 右上角的样式选择 -->
     <div class="styleSel">
       <el-select
         v-model="value"
@@ -11,6 +12,8 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item"></el-option>
       </el-select>
     </div>
+
+    <!-- 侧边栏 -->
     <div id="sidebar" :style="{
         position: 'fixed'
       }">
@@ -19,6 +22,8 @@
         <div id="split-bar" @mousedown="resize" v-show="mobileV"></div>
       </transition>
     </div>
+
+    <!-- 内容区 -->
     <v-markdown
       id="main"
       :style="{
@@ -66,10 +71,8 @@ export default {
     //BackToTop
   },
   methods: {
+    // 移动端适用，通过给value赋值人为改变侧边栏收展
     handleMobile(value) {
-      console.log("Index中的value：" + value);
-      console.log("fixed的值：" + this.$store.state.fixed);
-
       if (value !== undefined) {
         this.mobileV = value;
       } else {
@@ -83,6 +86,7 @@ export default {
     },
     getValue(color) {
       var elements = [];
+      // 获取所有h1元素列表
       elements[0] = document.querySelectorAll("h1");
       elements[1] = document.querySelectorAll("h2");
       elements[2] = document.querySelectorAll("h3");
@@ -99,6 +103,7 @@ export default {
       var max = 800;
       var mainmin = 200;
       var that = this;
+      // 通过调整margin-left改变内容区和侧边栏宽度 侧边栏宽度就是内容区的margin-left
       $(document).mousemove(function(e) {
         e.preventDefault();
         var x = e.pageX - $("#sidebar").offset().left;
@@ -107,12 +112,12 @@ export default {
           $(".aside-container").css("width", x - 5);
           $("#main").css("margin-left", x);
           that.$store.state.sidebarMarginLeft = x;
-          console.log(that.$store.state.sidebarMarginLeft);
         }
       });
     }
   },
   mounted() {
+    //取消resize方法中在document中添加的mousemove方法
     $(document).mouseup(function(e) {
       $(document).unbind("mousemove");
     });

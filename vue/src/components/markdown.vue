@@ -1,13 +1,6 @@
 <template>
+  <!-- @click.stop可以阻止事件冒泡 -->
   <div class="m-container" @click.stop="handleMobile">
-    <el-table
-      class="load"
-      v-loading="isLoading"
-      element-loading-text="拼命加载中"
-      element-loading-spinner="el-icon-loading"
-      element-loading-background="#DCDFE6"
-      style="width: 100%"
-    ></el-table>
     <div id="content" v-html="this.$store.state.readmeContent"></div>
   </div>
 </template>
@@ -46,6 +39,7 @@ export default {
       this.timer = setTimeout(this.apiFailed, 3000);
     }
   },
+  //在网页创建前根据路由获取内容
   created() {
     this.isLoading = true;
     this.axios({
@@ -58,27 +52,13 @@ export default {
         this.isLoading = false;
       })
       .catch(err => {
-        console.log(111);
+        console.log(err);
       });
-    this.timer = setTimeout(this.apiFailed, 8000);
-    // console.log(this.$store.state.readmeContent);
-    // marked.setOptions({
-    //   renderer: new marked.Renderer(),
-    //   highlight: function(readmeContent) {
-    //     return hljs.highlightAuto(readmeContent).value;
-    //   },
-    //   pedantic: false,
-    //   gfm: true,
-    //   tables: true,
-    //   breaks: false,
-    //   sanitize: false,
-    //   smartLists: true,
-    //   smartypants: false,
-    //   xhtml: false
-    // });
   },
   methods: {
     handleMobile() {
+      // 需要注意的是，手机端和电脑端的事件不一样，手机端因为没有鼠标，也就无法判断鼠标位置实现菜单栏的收展，所以在手机端需要点击内容部分实现菜单栏隐藏
+      // 只有当菜单栏没有固定时，点击内容部分，菜单栏隐藏
       if (this.$store.state.fixed === false) this.$emit("handleMobile", false);
     },
     changeData(value, render) {
