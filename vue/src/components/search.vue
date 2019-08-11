@@ -18,16 +18,14 @@ export default {
       searchContent: "text"
     };
   },
-  computed: {},
   methods: {
     changeContent(e) {
-      //console.log("Search component: " + this.searchContent);
+      //在输入停止0.4秒后再进行搜索
       setTimeout(() => {
         this.$emit("changeContent", this.searchContent);
       }, 400);
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 

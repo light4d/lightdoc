@@ -82,8 +82,10 @@ export default {
       console.log(text);
       var filterContent = [];
       if (text === "") {
+        // 若搜索内容为空全部显示
         this.treeNodes = this.data;
       } else {
+        // 将el-tree的内容重置
         this.treeNodes = [];
         this.filterTree(text, this.data);
       }
@@ -154,6 +156,7 @@ export default {
       this.$refs.aside.style.display = "none";
       this.$refs.menu.style.display = "block";
       this.$store.state.splitbar = false;
+      // 调用父亲的方法，强制设置成false隐藏侧边栏
       this.$emit("handleMobile", false);
     },
     handleFixed(value) {
@@ -183,6 +186,7 @@ export default {
     },
     // el-tree 添加自定义图标
     renderContent: function(h, { node, data, store }) {
+      //根据不同的文件类型设定不同的图标
       if (data.Path.indexOf(".md") != -1) {
         data.className = "mdicon";
       } else if (data.Path.indexOf(".pdf") != -1) {
