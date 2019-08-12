@@ -15,7 +15,7 @@ export default {
   name: "vSearch",
   data() {
     return {
-      searchContent: "text"
+      searchContent: ""
     };
   },
   methods: {

@@ -79,7 +79,6 @@ export default {
   },
   methods: {
     handleSearch(text) {
-      console.log(text);
       var filterContent = [];
       if (text === "") {
         // 若搜索内容为空全部显示
