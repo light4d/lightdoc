@@ -14,9 +14,13 @@
     </div>
 
     <!-- 侧边栏 -->
-    <div id="sidebar" :style="{
-        position: 'fixed'
-      }">
+    <div
+      id="sidebar"
+      :style="{
+        position: 'fixed',
+        width: this.$store.state.splitbar ? this.$store.state.sidebarMarginLeft === 'init' ? '250px' : this.$store.state.sidebarMarginLeft+'px': '20px'
+      }"
+    >
       <v-aside :mobileV="mobileV" @handleMobile="handleMobile"></v-aside>
       <transition name="el-zoom-in-center">
         <div id="split-bar" @mousedown="resize" v-show="mobileV"></div>
@@ -108,7 +112,7 @@ export default {
         e.preventDefault();
         var x = e.pageX - $("#sidebar").offset().left;
         if (x > min && x < max && e.pageX < $(window).width() - mainmin) {
-          $("#sidebar").css("width", x);
+          //$("#sidebar").css("width", x);
           $(".aside-container").css("width", x - 5);
           $("#main").css("margin-left", x);
           that.$store.state.sidebarMarginLeft = x;
