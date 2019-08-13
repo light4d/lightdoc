@@ -6,6 +6,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
+      redirect: '/README.md',
       component: resolve => require(['@/views/index.vue'], resolve),
       children: [
         {
