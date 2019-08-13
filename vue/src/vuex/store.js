@@ -1,7 +1,5 @@
-import marked from 'marked'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -14,62 +12,6 @@ const state = {
   fixed: false,
   sidebarMarginLeft: 'init'
 }
-const mutations = {
-  changeValue(state, newValue) {
-    state.Node = newValue
-    console.log(state.Node.Path)
-
-    var reg = /[^<>/\\\|:""\*\?]+\.\w+$/
-    var matchs = state.Node.Path.match(reg)
-    if (matchs != null) {
-      console.log(matchs[0])
-      state.Node.Name = state.Node.Path.match(reg)[0]
-    }
-
-    if (state.Node.Nodes.length > 0) {
-      for (let i = 0; i < state.Node.Nodes.length; i++) {
-        if (state.Node.Nodes[i].Path.indexOf('.md') == -1) {
-          return
-        } else {
-          console.log(state.Node.Nodes[i].Path.match(reg))
-        }
-      }
-      axios({
-        method: 'GET',
-        url: state.Node.Path + '/README.md ',
-        data: null
-      }).then((res) => {
-        state.readmeContent = marked(res.data)
-        console.log(res)
-      })
-        .catch((err) => {
-          console.log(err)
-        })
-    } else {
-      console.log(state, 'pdf')
-      if (state.Node.Path.indexOf('.pdf') > -1) {
-
-        window.open(state.Node.Path)
-        return
-      }
-      if (state.Node.Path.indexOf('.md') > -1) {
-        axios({
-          method: 'GET',
-          url: state.Node.Path,
-          data: null
-        })
-          .then((res) => {
-            console.log(res, 'md')
-            state.readmeContent = marked(res.data)
-          })
-          .catch((err) => {
-            console.log('errStort')
-          })
-      }
-    }
-  }
-}
 export default new Vuex.Store({
-  state,
-  mutations
+  state
 })
