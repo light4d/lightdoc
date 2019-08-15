@@ -65,7 +65,7 @@ export default {
   },
   mounted() {
     this.axios({
-      method: "TREE",
+      method: "PATCH",
       url: "/",
       data: null
     })
