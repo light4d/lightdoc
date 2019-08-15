@@ -65,6 +65,7 @@ export default {
   },
   mounted() {
     this.axios({
+      //获取tree目录
       method: "PATCH",
       url: "/",
       data: null
