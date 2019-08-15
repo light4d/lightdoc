@@ -10,7 +10,7 @@ import (
 func Init() error {
 	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Access-Control-Allow-Origin", "*")                           //允许访问所有域
-		writer.Header().Set("Access-Control-Allow-Methods", "GET,OPTIONS,TREE,FILE,LOGO") //允许访问所有域
+		writer.Header().Set("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,FILE,LOGO") //允许访问所有域
 		writer.Header().Add("Access-Control-Allow-Headers", "Content-Type")               //header的类型
 		writer.Header().Add("Access-Control-Allow-Credentials", "true")
 		switch request.Method {
@@ -24,7 +24,7 @@ func Init() error {
 
 			F := http.FileServer(http.Dir(config.Dist))
 			F.ServeHTTP(writer, request)
-		case "TREE":
+		case "PATCH":		//解决ss不支持自定义method的问题
 			controller.TreeHandler(writer, request)
 		case "LOGO":
 			controller.LogoHandler(writer, request)
