@@ -14,7 +14,7 @@
     "axios": "^0.19.0",
     "babel-preset-es2015": "^6.24.1",
     "element-ui": "^2.7.0",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^10.4.1",
     "jquery": "^3.4.1",
     "marked": "^0.6.2",
     "mavon-editor": "^2.7.3",
